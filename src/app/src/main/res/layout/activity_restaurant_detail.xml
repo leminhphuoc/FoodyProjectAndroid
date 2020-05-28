@@ -1,9 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RestaurantDetail">
+    tools:context=".RestaurantDetail"
+    android:orientation="vertical"
+    android:background="#D3D3D3">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20px">
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:id="@+id/timeOpenLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chưa mở cửa"
+                android:textColor="#C0C0C0"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00 - 21:00"
+                />
+        </LinearLayout>
+        <Button
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@id/timeOpenLayout"
+            android:text="Liên hệ"
+            android:layout_gravity="right"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFF">
+        <TextView
+            android:padding="5dp"
+            android:drawablePadding="10px"
+            android:drawableLeft="@drawable/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chợ Bùi Đức, Quốc lộ 1A, P.Tam hòa,\nTp.Biên hòa, Đồng nai"/>
+        <View
+            android:layout_marginLeft="10dp"
+            android:layout_width="4dp"
+            android:layout_height="40dp"
+            android:background="@drawable/dashline"
+            android:layerType="software" />
+        <TextView
+            android:padding="5dp"
+            android:drawablePadding="10px"
+            android:drawableLeft="@drawable/circle"
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.2km (Từ vị trí hiện tại)"/>
+        <TextView
+            android:padding="5dp"
+            android:drawablePadding="10px"
+            android:drawableLeft="@drawable/dinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quán ăn - Món Việt"/>
+        <TextView
+            android:padding="5dp"
+            android:drawablePadding="10px"
+            android:drawableLeft="@drawable/money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10,000đ - 160,000đ"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:padding="15px">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/money"/>
+        <ImageView
+            android:layout_marginLeft="70px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/money"/>
+        <ImageView
+            android:layout_marginLeft="70px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/money"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thực đơn"
+        android:textAlignment="textStart"
+        android:background="#FFFFFF"
+        android:layout_gravity="start"
+        android:drawableLeft="@drawable/money"
+        android:drawableRight="@drawable/circle"
+        android:padding="15px"
+        android:drawablePadding="10px"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm wifi \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Nhập mật khẩu"
+        android:textAlignment="textStart"
+        android:background="#FFFFFF"
+        android:layout_gravity="start"
+        android:drawableLeft="@drawable/money"
+        android:padding="15px"
+        android:drawablePadding="10px"/>
+</LinearLayout>
