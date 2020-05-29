@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RestaurantResult"
+    android:padding="8dp"
+    android:weightSum="20"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="9"
+        android:background="#F81F10">
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@+id/name"
+            android:layout_alignLeft="@+id/name"
+            android:layout_alignTop="@+id/name"
+            android:layout_weight="4"
+            android:background="@drawable/iconback"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="2"
+                android:background="@drawable/button_round"
+                android:drawableLeft="@drawable/iconsearch"
+                android:drawablePadding="10dp"
+                android:text="Bún"
+                android:paddingLeft="10dp"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="8"
+                android:background="@android:color/transparent"
+                android:text="Địa điểm ở Đồng Nai" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="9"
+        android:background="#D1C2C2">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:text="Đúng nhất"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:text="Gần tôi"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:text="Phổ biến"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/iconadjust"
+            android:layout_weight="1"
+            android:text="Bộ lọc"/>
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_weight="2"
+        android:id="@+id/recyclerviewResult_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

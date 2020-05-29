@@ -10,6 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button bntRestaurantList;
+    Button bntRestaurantResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, RestaurantList.class);
+                startActivity(i);
+            }
+        });
+
+        bntRestaurantResult = (Button) findViewById(R.id.buttonRestaurantResult);
+        bntRestaurantResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, RestaurantResult.class);
                 startActivity(i);
             }
         });
