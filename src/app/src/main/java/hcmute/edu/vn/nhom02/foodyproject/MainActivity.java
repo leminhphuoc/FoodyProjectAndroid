@@ -16,13 +16,5 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
 
-        bntRestaurantList = (Button) findViewById(R.id.buttonRestaurantList);
-        bntRestaurantList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, RestaurantList.class);
-                startActivity(i);
-            }
-        });
     }
 }
