@@ -33,7 +33,7 @@ public class RestaurantList extends AppCompatActivity {
         lstRestaurant.add(new Restaurant("Xôi gà Mỹ Huệ", "Đặng Văn Trơn, Hiệp Hoà, Tp. Biên Hòa, Đồng Nai", "Ăn vặt", R.drawable.dongnoixoiga));
         RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerview_id);
         RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this, lstRestaurant);
-        myrv.setLayoutManager(new GridLayoutManager(this, 3));
+        myrv.setLayoutManager(new GridLayoutManager(this, 2));
         myrv.setAdapter(myAdapter);
     }
 }
