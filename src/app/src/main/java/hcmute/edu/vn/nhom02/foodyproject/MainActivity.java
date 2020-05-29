@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     Button bntRestaurantList;
     Button bntRestaurantResult;
     Button bntProvinceList;
+    Button btnDetailPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, ProvinceList.class);
+                startActivity(i);
+            }
+        });
+
+        btnDetailPage = findViewById(R.id.buttonDetailPage);
+        btnDetailPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, RestaurantDetail.class);
                 startActivity(i);
             }
         });

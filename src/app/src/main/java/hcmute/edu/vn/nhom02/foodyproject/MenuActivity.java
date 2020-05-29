@@ -56,6 +56,5 @@ public class MenuActivity extends AppCompatActivity {
         String name = food.getName();
         Double price = food.getPrice();
         String foodData = name + "\n" + price ;
-        Toast.makeText(this, foodData, Toast.LENGTH_LONG).show();
     }
 }
