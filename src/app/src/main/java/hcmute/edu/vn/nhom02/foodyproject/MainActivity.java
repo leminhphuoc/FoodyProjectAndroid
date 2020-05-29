@@ -10,11 +10,39 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button bntRestaurantList;
+    Button bntRestaurantResult;
+    Button bntProvinceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        bntRestaurantList = (Button) findViewById(R.id.buttonRestaurantList);
+        bntRestaurantList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, RestaurantList.class);
+                startActivity(i);
+            }
+        });
+
+        bntRestaurantResult = (Button) findViewById(R.id.buttonRestaurantResult);
+        bntRestaurantResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, RestaurantResult.class);
+                startActivity(i);
+            }
+        });
+
+        bntProvinceList = (Button) findViewById(R.id.buttonProvinceList);
+        bntProvinceList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, ProvinceList.class);
+                startActivity(i);
+            }
+        });
     }
 }

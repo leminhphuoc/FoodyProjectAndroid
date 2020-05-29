@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:weightSum="20"
+    tools:context=".ProvinceList">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="9"
+        android:background="@drawable/province_round">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:text="Hủy"
+            android:textColor="#B1AEAE"
+            android:textSize="14sp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:text="Chọn tỉnh thành"
+            android:textColor="#FDFBFB"
+            android:textSize="16sp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:text="Xong"
+            android:textColor="#B1AEAE"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="9"
+        android:background="@drawable/search_round"
+        android:drawableLeft="@drawable/iconsearch"
+        android:drawablePadding="10dp"
+        android:hint="Tìm Tỉnh thành"
+        android:paddingLeft="10dp"
+        android:textSize="15sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewProvince_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"></androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

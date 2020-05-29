@@ -9,14 +9,14 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantList extends AppCompatActivity {
+public class RestaurantResult extends AppCompatActivity {
 
     List<Restaurant> lstRestaurant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_list);
+        setContentView(R.layout.activity_restaurant_result);
 
         lstRestaurant = new ArrayList<>();
         lstRestaurant.add(new Restaurant("Đồ ăn vặt Shin", "128 Phan Trung, P. Tân Tiến, Tp. Biên Hòa, Đồng Nai", "Quán ăn", R.drawable.dongnaianvat));
@@ -31,9 +31,9 @@ public class RestaurantList extends AppCompatActivity {
         lstRestaurant.add(new Restaurant("Rau má xanh Yummy", "669 Đồng Khởi, KP. 8, P. Tân Phong, Tp. Biên Hòa, Đồng Nai", "Cafe", R.drawable.dongnairaumaxanh));
         lstRestaurant.add(new Restaurant("Sushi Kaido", "57 Phan Đình Phùng, Tp. Biên Hòa, Đồng Nai", "Quán ăn", R.drawable.dongnaisushi));
         lstRestaurant.add(new Restaurant("Xôi gà Mỹ Huệ", "Đặng Văn Trơn, Hiệp Hoà, Tp. Biên Hòa, Đồng Nai", "Ăn vặt", R.drawable.dongnoixoiga));
-        RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerview_id);
-        RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this, lstRestaurant);
-        myrv.setLayoutManager(new GridLayoutManager(this, 2));
+        RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerviewResult_id);
+        RecyclerViewAdapterResult myAdapter = new RecyclerViewAdapterResult(this, lstRestaurant);
+        myrv.setLayoutManager(new GridLayoutManager(this, 1));
         myrv.setAdapter(myAdapter);
     }
 }
