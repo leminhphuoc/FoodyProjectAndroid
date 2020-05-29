@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +7,10 @@
     tools:context=".RestaurantDetail"
     android:orientation="vertical"
     android:background="#D3D3D3">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <RelativeLayout
         android:background="#FFFFFF"
@@ -33,61 +37,73 @@
                 />
         </LinearLayout>
         <Button
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_toLeftOf="@id/timeOpenLayout"
             android:text="Liên hệ"
-            android:layout_gravity="right"/>
+            android:id="@+id/btnContact"
+            android:layout_gravity="right"
+            android:drawableLeft="@drawable/contact"
+            android:drawablePadding="10px"
+            />
     </RelativeLayout>
-    <LinearLayout
-        android:layout_marginTop="20px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#FFFF">
-        <TextView
-            android:padding="5dp"
-            android:drawablePadding="10px"
-            android:drawableLeft="@drawable/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chợ Bùi Đức, Quốc lộ 1A, P.Tam hòa,\nTp.Biên hòa, Đồng nai"/>
-        <View
-            android:layout_marginLeft="10dp"
-            android:layout_width="4dp"
-            android:layout_height="40dp"
-            android:background="@drawable/dashline"
-            android:layerType="software" />
-        <TextView
-            android:padding="5dp"
-            android:drawablePadding="10px"
-            android:drawableLeft="@drawable/circle"
-            android:id="@+id/tvDistance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4.2km (Từ vị trí hiện tại)"/>
-        <TextView
-            android:padding="5dp"
-            android:drawablePadding="10px"
-            android:drawableLeft="@drawable/dinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quán ăn - Món Việt"/>
-        <TextView
-            android:padding="5dp"
-            android:drawablePadding="10px"
-            android:drawableLeft="@drawable/money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10,000đ - 160,000đ"/>
-    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="191dp"
+            android:layout_marginTop="20px"
+            android:background="@drawable/map"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/location"
+                android:drawablePadding="10px"
+                android:padding="5dp"
+                android:text="Chợ Bùi Đức, Quốc lộ 1A, P.Tam hòa,\nTp.Biên hòa, Đồng nai" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/dashline"
+                android:layerType="software" />
+
+            <TextView
+                android:id="@+id/tvDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/circle"
+                android:drawablePadding="10px"
+                android:padding="5dp"
+                android:text="4.2km (Từ vị trí hiện tại)" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/dinner"
+                android:drawablePadding="10px"
+                android:padding="5dp"
+                android:text="Quán ăn - Món Việt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/money"
+                android:drawablePadding="10px"
+                android:padding="5dp"
+                android:text="10,000đ - 160,000đ" />
+        </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,19 +111,19 @@
         android:background="#FFFFFF"
         android:padding="15px">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/money"/>
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@drawable/check"/>
         <ImageView
             android:layout_marginLeft="70px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/money"/>
+            android:layout_width="100px"
+            android:layout_height="40px"
+            android:src="@drawable/wifi"/>
         <ImageView
             android:layout_marginLeft="70px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/money"/>
+            android:layout_width="70px"
+            android:layout_height="40px"
+            android:src="@drawable/shipper"/>
     </LinearLayout>
 
     <View
@@ -116,28 +132,43 @@
         android:background="@android:color/darker_gray"/>
 
     <Button
+        android:id="@+id/btnMenu"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Thực đơn"
         android:textAlignment="textStart"
         android:background="#FFFFFF"
         android:layout_gravity="start"
-        android:drawableLeft="@drawable/money"
-        android:drawableRight="@drawable/circle"
+        android:drawableLeft="@drawable/foodmenu"
+        android:drawableRight="@drawable/arrowright"
         android:padding="15px"
         android:drawablePadding="10px"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
+
     <Button
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Thêm wifi \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Nhập mật khẩu"
         android:textAlignment="textStart"
         android:background="#FFFFFF"
         android:layout_gravity="start"
-        android:drawableLeft="@drawable/money"
+        android:drawableLeft="@drawable/wifi2"
         android:padding="15px"
-        android:drawablePadding="10px"/>
-</LinearLayout>
+        android:drawablePadding="10px"
+        android:id="@+id/btnAddWifi"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_weight="1"
+            android:id="@+id/recyclerview_food"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</ScrollView>

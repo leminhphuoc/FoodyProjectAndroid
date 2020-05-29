@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:layout_width = "match_parent"
+    android:layout_height = "wrap_content"
+    android:gravity = "center_vertical"
+    android:padding = "10dp"
+    android:weightSum = "1">
+        <ImageView
+            android:background="#FF00"
+            android:id="@+id/backButton"
+            android:layout_width = "20dp"
+            android:layout_height = "20dp"
+            android:src = "@drawable/arrow"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center_vertical"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:gravity="center"
+            android:id = "@+id/actionBarResName"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:text = "Bún đậu Cô Chang"
+            android:textSize = "15sp"
+            android:textColor = "#FFF" />
+        <TextView
+            android:textFontWeight="20"
+            android:gravity="center"
+            android:id = "@+id/actionBarResLocation"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:text = "Đồng Nai"
+            android:textSize = "12sp"
+            android:textColor = "#FFFF"
+            android:textStyle = "bold" />
+    </LinearLayout>
 
 </LinearLayout>

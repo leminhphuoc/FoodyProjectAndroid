@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android='http://schemas.android.com/apk/res/android'
+    android:layout_width='fill_parent'
+    android:layout_height='fill_parent'
+    android:orientation='vertical'
+    android:padding='10sp' >
+
+    <EditText
+        android:id='@+id/wifi_username'
+        android:layout_width='fill_parent'
+        android:layout_height='wrap_content'
+        android:hint='Tên wifi show sẵn nếu đã kết nối'
+        android:singleLine='true'
+        android:drawableLeft="@drawable/wifi2"
+        android:drawablePadding="15px">
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:drawablePadding="15px"
+        android:drawableLeft="@drawable/pass"
+        android:id='@+id/wifi_password'
+        android:layout_width='match_parent'
+        android:layout_height='wrap_content'
+        android:hint='Nhập mật khẩu'
+        android:ems='10'
+        android:inputType='textPassword' >
+    </EditText>
 
 </LinearLayout>
