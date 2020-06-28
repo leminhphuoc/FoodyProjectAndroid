@@ -1,15 +1,17 @@
-package hcmute.edu.vn.nhom02.foodyproject;
+package hcmute.edu.vn.nhom02.foodyproject.viewmodel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.pm.ApplicationInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import hcmute.edu.vn.nhom02.foodyproject.R;
+import hcmute.edu.vn.nhom02.foodyproject.service.RecyclerViewAdapter;
+import hcmute.edu.vn.nhom02.foodyproject.model.Restaurant;
 
 public class RestaurantList extends AppCompatActivity {
 

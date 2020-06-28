@@ -1,4 +1,4 @@
-package hcmute.edu.vn.nhom02.foodyproject;
+package hcmute.edu.vn.nhom02.foodyproject.service;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import hcmute.edu.vn.nhom02.foodyproject.R;
 import hcmute.edu.vn.nhom02.foodyproject.model.Province;
 
 public class RecyclerViewAdapterProvince extends RecyclerView.Adapter<RecyclerViewAdapterProvince.MyViewHolder>{

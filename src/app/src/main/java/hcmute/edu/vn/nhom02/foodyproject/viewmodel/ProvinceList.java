@@ -1,4 +1,4 @@
-package hcmute.edu.vn.nhom02.foodyproject;
+package hcmute.edu.vn.nhom02.foodyproject.viewmodel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.CheckedTextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import hcmute.edu.vn.nhom02.foodyproject.R;
+import hcmute.edu.vn.nhom02.foodyproject.service.RecyclerViewAdapterProvince;
 import hcmute.edu.vn.nhom02.foodyproject.data.DBManager;
 import hcmute.edu.vn.nhom02.foodyproject.model.Province;
 

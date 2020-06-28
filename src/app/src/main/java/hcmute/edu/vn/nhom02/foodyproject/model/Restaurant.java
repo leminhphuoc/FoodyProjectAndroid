@@ -1,4 +1,4 @@
-package hcmute.edu.vn.nhom02.foodyproject;
+package hcmute.edu.vn.nhom02.foodyproject.model;
 
 import java.util.Date;
 

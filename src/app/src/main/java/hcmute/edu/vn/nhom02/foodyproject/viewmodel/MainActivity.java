@@ -1,4 +1,4 @@
-package hcmute.edu.vn.nhom02.foodyproject;
+package hcmute.edu.vn.nhom02.foodyproject.viewmodel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import hcmute.edu.vn.nhom02.foodyproject.R;
 import hcmute.edu.vn.nhom02.foodyproject.data.DBManager;
 
 public class MainActivity extends AppCompatActivity {
