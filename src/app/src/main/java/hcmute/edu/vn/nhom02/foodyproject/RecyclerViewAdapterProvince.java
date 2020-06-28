@@ -1,14 +1,12 @@
 package hcmute.edu.vn.nhom02.foodyproject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +14,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import hcmute.edu.vn.nhom02.foodyproject.model.Province;
 
 public class RecyclerViewAdapterProvince extends RecyclerView.Adapter<RecyclerViewAdapterProvince.MyViewHolder>{
 
