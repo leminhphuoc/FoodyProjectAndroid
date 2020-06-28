@@ -1,4 +1,4 @@
-package hcmute.edu.vn.nhom02.foodyproject;
+package hcmute.edu.vn.nhom02.foodyproject.model;
 
 public class Food {
     private  String Name;

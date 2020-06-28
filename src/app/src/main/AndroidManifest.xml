@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuActivity"></activity>
-        <activity android:name=".ProvinceList"></activity>
-        <activity android:name=".RestaurantResult" />
-        <activity android:name=".RestaurantList" />
-        <activity android:name=".RestaurantDetail" /><!-- <activity android:name=".RestaurantDetail" /> -->
-        <activity android:name=".MainActivity">
+        <activity android:name=".viewmodel.MenuActivity"></activity>
+        <activity android:name=".viewmodel.ProvinceList"></activity>
+        <activity android:name=".viewmodel.RestaurantResult" />
+        <activity android:name=".viewmodel.RestaurantList" />
+        <activity android:name=".viewmodel.RestaurantDetail" /><!-- <activity android:name=".RestaurantDetail" /> -->
+        <activity android:name=".viewmodel.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,16 +1,13 @@
-package hcmute.edu.vn.nhom02.foodyproject;
+package hcmute.edu.vn.nhom02.foodyproject.viewmodel;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -23,6 +20,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import hcmute.edu.vn.nhom02.foodyproject.model.Food;
+import hcmute.edu.vn.nhom02.foodyproject.R;
+import hcmute.edu.vn.nhom02.foodyproject.service.RecylerFoodAdapter;
 
 public class RestaurantDetail extends AppCompatActivity {
 
@@ -60,7 +61,7 @@ public class RestaurantDetail extends AppCompatActivity {
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(RestaurantDetail.this,MenuActivity.class);
+                Intent intent= new Intent(RestaurantDetail.this, MenuActivity.class);
                 startActivity(intent);
             }
         });
@@ -71,9 +72,9 @@ public class RestaurantDetail extends AppCompatActivity {
         tvDistance.setText(Html.fromHtml(text));
 
         lstFood = new ArrayList<>();
-        lstFood.add(new Food("Mẹt 160k", R.drawable.dongnaianvat));
-        lstFood.add(new Food("Mẹt khủng", R.drawable.dongnaibanhmi));
-        lstFood.add(new Food("Mẹt 4 người" , R.drawable.dongnaibundau));
+        lstFood.add(new Food("Mẹt 160k", R.drawable.dongnai1));
+        lstFood.add(new Food("Mẹt khủng", R.drawable.dongnai2));
+        lstFood.add(new Food("Mẹt 4 người" , R.drawable.dongnai3));
         RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerview_food);
         RecylerFoodAdapter myAdapter = new RecylerFoodAdapter(this, lstFood);
         myrv.setLayoutManager(new GridLayoutManager(this, 2));

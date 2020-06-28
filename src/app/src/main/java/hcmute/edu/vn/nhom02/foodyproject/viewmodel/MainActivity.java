@@ -1,4 +1,4 @@
-package hcmute.edu.vn.nhom02.foodyproject;
+package hcmute.edu.vn.nhom02.foodyproject.viewmodel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import hcmute.edu.vn.nhom02.foodyproject.R;
+import hcmute.edu.vn.nhom02.foodyproject.data.DBManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //create database
+        DBManager db= new DBManager( this );
+        db.backupProvice();
 
         bntRestaurantList = (Button) findViewById(R.id.buttonRestaurantList);
         bntRestaurantList.setOnClickListener(new View.OnClickListener() {
