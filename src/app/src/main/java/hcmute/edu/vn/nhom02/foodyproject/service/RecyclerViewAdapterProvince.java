@@ -58,12 +58,13 @@ public class RecyclerViewAdapterProvince extends RecyclerView.Adapter<RecyclerVi
                 if (isChecked){
                     holder.tv_province_name.setTextColor(Color.BLUE);
                     Intent intent = new Intent(mContext, RestaurantList.class);
-
                     //passing data to the book activity
                     intent.putExtra("Noteee",mData.get(position).getNote());
                     intent.putExtra("ProNameee",mData.get(position).getName());
                     //start the activity
                     mContext.startActivity(intent);
+                    holder.cb_province.setChecked(false);
+                    holder.tv_province_name.setTextColor(Color.BLACK);
                 }
                 else {
                     holder.tv_province_name.setTextColor(Color.parseColor("#2d2d2d"));

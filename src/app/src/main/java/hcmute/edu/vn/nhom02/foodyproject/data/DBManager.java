@@ -13,7 +13,7 @@ import hcmute.edu.vn.nhom02.foodyproject.model.Province;
 
 public class DBManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="dbManager";
-    private static final String TABLE_NAME="provice";
+    private static final String TABLE_NAME="province";
     private static final String ID="id";
     private static final String NAME="name";
     private static final String NOTE="note";

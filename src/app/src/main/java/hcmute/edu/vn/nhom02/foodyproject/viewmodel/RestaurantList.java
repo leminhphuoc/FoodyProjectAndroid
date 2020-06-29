@@ -34,6 +34,10 @@ public class RestaurantList extends AppCompatActivity {
         Intent intent = getIntent();
         note = intent.getStringExtra("Noteee");
 
+        //copy ham getAll ben province
+        //chuyen dong nay qua result
+        //select random limit 20 de load ngau nhien trang home
+
         Toast.makeText(this, note + "", Toast.LENGTH_LONG).show();
         lstRestaurant = new ArrayList<>();
         for (int j = 0; j < 10; j++) {
