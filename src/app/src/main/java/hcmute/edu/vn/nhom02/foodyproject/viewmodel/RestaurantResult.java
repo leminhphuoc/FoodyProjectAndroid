@@ -23,9 +23,9 @@ public class RestaurantResult extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_result);
 
         lstRestaurant = new ArrayList<>();
-        for (int j = 1; j <= 10; j++) {
+        for (int j = 0; j < 10; j++) {
             int drawableResourceId = this.getResources().getIdentifier("dongnai" + j, "drawable", this.getPackageName());
-            lstRestaurant.add(new Restaurant("Đồ ăn vặt Shin", "128 Phan Trung, P. Tân Tiến, Tp. Biên Hòa, Đồng Nai", "Quán ăn", drawableResourceId));
+            lstRestaurant.add(new Restaurant("Đồ ăn vặt Shin", "128 Phan Trung, P. Tân Tiến, Tp. Biên Hòa, Đồng Nai", "Quán ăn", ""));
         }
         RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerviewResult_id);
         RecyclerViewAdapterResult myAdapter = new RecyclerViewAdapterResult(this, lstRestaurant);

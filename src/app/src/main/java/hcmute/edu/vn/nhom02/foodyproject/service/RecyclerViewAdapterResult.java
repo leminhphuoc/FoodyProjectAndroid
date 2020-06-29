@@ -42,7 +42,7 @@ public class RecyclerViewAdapterResult extends RecyclerView.Adapter<RecyclerView
         holder.tv_restaurant_name.setText(mData.get(position).getName());
         holder.tv_restaurant_address.setText(mData.get(position).getAddress());
         holder.tv_restaurant_type.setText(mData.get(position).getType());
-        holder.img_restaurant_thumbnail.setImageResource(mData.get(position).getThumbnail());
+        //holder.img_restaurant_thumbnail.setImageResource(mData.get(position).getThumbnail());
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

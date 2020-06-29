@@ -8,12 +8,12 @@ public class Restaurant {
     private String Type;
     private String TimeOpen;
     private String TimeClose;
-    private int Thumbnail;
+    private String Thumbnail;
 
     public Restaurant() {
     }
 
-    public Restaurant(String name, String address, String type, int thumbnail) {
+    public Restaurant(String name, String address, String type, String thumbnail) {
         Name = name;
         Address = address;
         Type = type;
@@ -60,11 +60,11 @@ public class Restaurant {
         TimeClose = timeClose;
     }
 
-    public int getThumbnail() {
+    public String getThumbnail() {
         return Thumbnail;
     }
 
-    public void setThumbnail(int thumbnail) {
+    public void setThumbnail(String thumbnail) {
         Thumbnail = thumbnail;
     }
 }
