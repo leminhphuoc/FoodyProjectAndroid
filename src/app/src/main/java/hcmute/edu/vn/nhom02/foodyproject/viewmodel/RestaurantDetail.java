@@ -1,13 +1,19 @@
 package hcmute.edu.vn.nhom02.foodyproject.viewmodel;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -29,7 +35,8 @@ public class RestaurantDetail extends AppCompatActivity {
 
     TextView tvDistance;
     List<Food> lstFood;
-    Button btnWifi, btnMenu;
+    Button btnWifi, btnMenu, btnContact;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +68,21 @@ public class RestaurantDetail extends AppCompatActivity {
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(RestaurantDetail.this, MenuActivity.class);
+                Intent intent = new Intent(RestaurantDetail.this, RestaurantTabhost.class);
                 startActivity(intent);
             }
         });
 
+        findViewById(R.id.btnContact).setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent();
+                callIntent.setAction(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:0978373449"));
+                startActivity(callIntent);
+            }
+        });
 
         tvDistance = (TextView) findViewById(R.id.tvDistance);
         String text = "<font color=#00ff00>4.2km</font> (Từ vị trí hiện tại)";
@@ -100,5 +117,29 @@ public class RestaurantDetail extends AppCompatActivity {
                 });
 
         alertDialogBuilder.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(RestaurantDetail.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 }

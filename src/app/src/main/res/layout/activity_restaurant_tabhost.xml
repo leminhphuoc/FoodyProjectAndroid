@@ -1,9 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".viewmodel.RestaurantTabhost">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme">
+    
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+            <ImageView
+                android:background="#FF00"
+                android:id="@+id/backButton"
+                android:layout_width = "20dp"
+                android:layout_height = "20dp"
+                android:src = "@drawable/arrow"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_vertical"/>
+
+            <TabWidget
+                android:background="@drawable/tab_round"
+                android:id="@android:id/tabs"
+                android:layout_width="wrap_content"
+                android:layout_height="70px"
+                android:layout_gravity="center_horizontal"/>
+        </androidx.appcompat.widget.Toolbar>
+<!--        <TabWidget-->
+<!--            android:id="@android:id/tabs"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="-4dp"-->
+<!--            android:layout_weight="0" />-->
+
+        <TextView
+            android:padding="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Bún đậu Cô Chang"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:gravity="center_horizontal"
+            android:textColor="#FF0000"
+            android:layout_marginBottom="5dp"
+            android:background="#ECECEC"
+            />
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" />
+
+
+
+    </LinearLayout>
+    </TabHost>
+
+</LinearLayout>
