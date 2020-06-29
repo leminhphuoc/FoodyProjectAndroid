@@ -60,11 +60,14 @@ public class DBManager extends SQLiteOpenHelper {
                 province.setId(cursor.getInt(0));
                 province.setName(cursor.getString(1));
                 province.setNote(cursor.getString(2));
+                listProvince.add(province);
             }while (cursor.moveToNext());
         }
         db.close();
         return  listProvince;
     }
+
+
 
 
 

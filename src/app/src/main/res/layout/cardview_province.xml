@@ -17,7 +17,7 @@
         android:orientation="horizontal"
         android:weightSum="10">
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/checkbox_province"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -33,7 +33,7 @@
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/buttonProName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"

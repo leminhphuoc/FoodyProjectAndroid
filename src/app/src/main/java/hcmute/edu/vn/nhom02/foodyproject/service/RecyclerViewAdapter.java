@@ -47,20 +47,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.tv_restaurant_name.setText(mData.get(position).getName());
         Picasso.with(mContext).load(mData.get(position).getThumbnail()).resize(140,140).into(holder.img_restaurant_thumbnail);
-//        holder.cardview.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(mContext, RestaurantList.class);
-//
-//                //passing data to the book activity
-//                intent.putExtra("Name",mData.get(position).getName());
-//                intent.putExtra("Address",mData.get(position).getAddress());
-//                intent.putExtra("Thumbnail",mData.get(position).getThumbnail());
-//                //start the activity
-//                mContext.startActivity(intent);
-//            }
-//        });
+        holder.cardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(mContext, RestaurantList.class);
+
+                //passing data to the book activity
+                intent.putExtra("Name",mData.get(position).getName());
+                intent.putExtra("Address",mData.get(position).getAddress());
+                intent.putExtra("Thumbnail",mData.get(position).getThumbnail());
+                //start the activity
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -72,14 +72,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView tv_restaurant_name;
         ImageView img_restaurant_thumbnail;
-        //CardView cardview;
+        CardView cardview;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tv_restaurant_name=(TextView) itemView.findViewById(R.id.restaurant_name_id);
             img_restaurant_thumbnail=(ImageView) itemView.findViewById(R.id.restaurant_img_id);
-            //cardview=(CardView) itemView.findViewById(R.id.cardview_id);
+            cardview=(CardView) itemView.findViewById(R.id.cardview_id);
         }
     }
 }

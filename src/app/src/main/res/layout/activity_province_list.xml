@@ -56,10 +56,15 @@
         android:paddingLeft="10dp"
         android:textSize="15sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewProvince_id"
+    <RadioGroup
+        android:id="@+id/radioGroupId"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewProvince_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"></androidx.recyclerview.widget.RecyclerView>
+    </RadioGroup>
 
 </LinearLayout>
