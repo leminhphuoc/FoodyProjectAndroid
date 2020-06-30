@@ -1,17 +1,15 @@
 package hcmute.edu.vn.nhom02.foodyproject.model;
 
-public class Province {
+public class Tag {
     private int Id;
     private String Name;
-    private String Note;
 
-    public Province() {
+    public Tag() {
     }
 
-    public Province(int id, String name, String note) {
+    public Tag(int id, String name) {
         Id = id;
         Name = name;
-        Note = note;
     }
 
     public int getId() {
@@ -28,13 +26,5 @@ public class Province {
 
     public void setName(String name) {
         Name = name;
-    }
-
-    public String getNote() {
-        return Note;
-    }
-
-    public void setNote(String note) {
-        Note = note;
     }
 }

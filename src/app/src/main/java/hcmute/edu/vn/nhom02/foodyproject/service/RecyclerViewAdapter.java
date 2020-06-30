@@ -2,6 +2,7 @@ package hcmute.edu.vn.nhom02.foodyproject.service;
 
 import android.content.Context;
 import android.content.Intent;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
@@ -43,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
         holder.tv_restaurant_name.setText(mData.get(position).getName());
-        holder.img_restaurant_thumbnail.setImageResource(mData.get(position).getThumbnail());
+        Picasso.with(mContext).load(mData.get(position).getThumbnail()).resize(190,140).into(holder.img_restaurant_thumbnail);
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 //passing data to the book activity
                 intent.putExtra("Name",mData.get(position).getName());
-                intent.putExtra("Address",mData.get(position).getAddress());
+                intent.putExtra("Address",mData.get(position).getLocationId());
                 intent.putExtra("Thumbnail",mData.get(position).getThumbnail());
                 //start the activity
                 mContext.startActivity(intent);
@@ -79,5 +82,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             cardview=(CardView) itemView.findViewById(R.id.cardview_id);
         }
     }
+
 }
 

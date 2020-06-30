@@ -1,24 +1,31 @@
 package hcmute.edu.vn.nhom02.foodyproject.model;
 
 public class Food {
-    private  String Name;
-    private  Double Price;
-    private  int Image;
+    private int Id;
+    private String Name;
+    private Double Price;
+    private String Image;
+    private int RestaurantId;
+    private int FoodCategoryId;
 
-    public Food(String name, Double price, int image) {
+    public Food() {
+    }
+
+    public Food(int id, String name, Double price, String image, int restaurantId, int foodCategoryId) {
+        Id = id;
         Name = name;
         Price = price;
         Image = image;
+        RestaurantId = restaurantId;
+        FoodCategoryId = foodCategoryId;
     }
 
-    public Food(String name, int image) {
-        Name = name;
-        Image = image;
+    public int getId() {
+        return Id;
     }
 
-    public Food(String name, double price) {
-        Name = name;
-        Price = price;
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getName() {
@@ -37,15 +44,27 @@ public class Food {
         Price = price;
     }
 
-    public int getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         Image = image;
     }
 
-    public String toString() {
-        return Name;
+    public int getRestaurantId() {
+        return RestaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        RestaurantId = restaurantId;
+    }
+
+    public int getFoodCategoryId() {
+        return FoodCategoryId;
+    }
+
+    public void setFoodCategoryId(int foodCategoryId) {
+        FoodCategoryId = foodCategoryId;
     }
 }

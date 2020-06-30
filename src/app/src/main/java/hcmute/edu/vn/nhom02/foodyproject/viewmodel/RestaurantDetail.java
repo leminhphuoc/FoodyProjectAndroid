@@ -98,9 +98,9 @@ public class RestaurantDetail extends AppCompatActivity {
         tvDistance.setText(Html.fromHtml(text));
 
         lstFood = new ArrayList<>();
-        lstFood.add(new Food("Mẹt 160k", R.drawable.dongnai1));
-        lstFood.add(new Food("Mẹt khủng", R.drawable.dongnai2));
-        lstFood.add(new Food("Mẹt 4 người" , R.drawable.dongnai3));
+//        lstFood.add(new Food("Mẹt 160k", R.drawable.dongnai1));
+//        lstFood.add(new Food("Mẹt khủng", R.drawable.dongnai2));
+//        lstFood.add(new Food("Mẹt 4 người" , R.drawable.dongnai3));
         RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerview_food);
         RecylerFoodAdapter myAdapter = new RecylerFoodAdapter(this, lstFood);
         myrv.setLayoutManager(new GridLayoutManager(this, 2));
