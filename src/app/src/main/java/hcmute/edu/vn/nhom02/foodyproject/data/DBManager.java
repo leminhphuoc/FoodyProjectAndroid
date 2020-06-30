@@ -1,11 +1,16 @@
 package hcmute.edu.vn.nhom02.foodyproject.data;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,50 +35,68 @@ public class DBManager extends SQLiteOpenHelper {
         super(context,DATABASE_NAME,null,1);
         this.context= context;
     }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String strProvince ="CREATE TABLE "+TABLE1+" ("+
-                "id" +" INTEGER PRIMARY KEY, "+
-                "name" +" TEXT, "+
-                "note" +" TEXT"+
-                ");";
-        String strRestaurant ="CREATE TABLE "
-                +TABLE2+
-                " ( id INTEGER PRIMARY KEY, name TEXT, provinceId INTEGER, thumbnailImage TEXT, tagId INTEGER,"+
-                " description TEXT, locationId INTEGER, timeOpen INTEGER, timeClose  INTEGER)";
-        String strTag ="CREATE TABLE "+TABLE3+" ("+
-                "id" +" INTEGER PRIMARY KEY, "+
-                "name" +" TEXT"+
-                ");";
-        String strRestaurantImage ="CREATE TABLE "+TABLE4+" ("+
-                "id" +" INTEGER PRIMARY KEY, "+
-                "sourceImage" +" TEXT, "+
-                "restaurantId" +" INTEGER"+
-                ");";
-        String strLocation ="CREATE TABLE "+TABLE5+" ("+
-                "id" +" INTEGER PRIMARY KEY, "+
-                "name" +" TEXT,"+
-                "latitude" +" REAL, "+
-                "longitude" +" REAL"+
-                ")";
-        String strFoodCategory ="CREATE TABLE "+TABLE6+" ("+
-                "id" +" INTEGER PRIMARY KEY, "+
-                "name" +" TEXT"+
-                ");";
-        String strFood ="CREATE TABLE "+TABLE7+" ("+
-                "id" +" INTEGER PRIMARY KEY, "+
-                "price" +" REAL, "+
-                "sourceImage" +" TEXT, "+
-                "restaurantId" +" INTEGER, "+
-                "foodCategoryId" +" INTEGER"+
-                ");";
-        db.execSQL(strProvince);
-        db.execSQL(strRestaurant);
-        db.execSQL(strRestaurantImage);
-        db.execSQL(strTag);
-        db.execSQL(strLocation);
-        db.execSQL(strFoodCategory);
-        db.execSQL(strFood);
+        if(!checkDataBase())
+        {
+            String strProvince ="CREATE TABLE "+TABLE1+" ("+
+                    "id" +" INTEGER PRIMARY KEY, "+
+                    "name" +" TEXT, "+
+                    "note" +" TEXT"+
+                    ");";
+            String strRestaurant ="CREATE TABLE "
+                    +TABLE2+
+                    " ( id INTEGER PRIMARY KEY, name TEXT, provinceId INTEGER, thumbnailImage TEXT, tagId INTEGER,"+
+                    " description TEXT, locationId INTEGER, timeOpen INTEGER, timeClose  INTEGER)";
+            String strTag ="CREATE TABLE "+TABLE3+" ("+
+                    "id" +" INTEGER PRIMARY KEY, "+
+                    "name" +" TEXT"+
+                    ");";
+            String strRestaurantImage ="CREATE TABLE "+TABLE4+" ("+
+                    "id" +" INTEGER PRIMARY KEY, "+
+                    "sourceImage" +" TEXT, "+
+                    "restaurantId" +" INTEGER"+
+                    ");";
+            String strLocation ="CREATE TABLE "+TABLE5+" ("+
+                    "id" +" INTEGER PRIMARY KEY, "+
+                    "name" +" TEXT,"+
+                    "latitude" +" REAL, "+
+                    "longitude" +" REAL"+
+                    ")";
+            String strFoodCategory ="CREATE TABLE "+TABLE6+" ("+
+                    "id" +" INTEGER PRIMARY KEY, "+
+                    "name" +" TEXT"+
+                    ");";
+            String strFood ="CREATE TABLE "+TABLE7+" ("+
+                    "id" +" INTEGER PRIMARY KEY, "+
+                    "price" +" REAL, "+
+                    "sourceImage" +" TEXT, "+
+                    "restaurantId" +" INTEGER, "+
+                    "foodCategoryId" +" INTEGER"+
+                    ");";
+
+            db.execSQL(strProvince);
+            db.execSQL(strRestaurant);
+            db.execSQL(strRestaurantImage);
+            db.execSQL(strTag);
+            db.execSQL(strLocation);
+            db.execSQL(strFoodCategory);
+            db.execSQL(strFood);
+            backupProvice();
+        }
+    }
+
+    private boolean checkDataBase() {
+        SQLiteDatabase checkDB = null;
+        try {
+            checkDB = SQLiteDatabase.openDatabase(DATABASE_NAME, null,
+                    SQLiteDatabase.OPEN_READONLY);
+            checkDB.close();
+        } catch (SQLiteException e) {
+            // database doesn't exist yet.
+        }
+        return checkDB != null;
     }
 
     @Override
@@ -139,6 +162,7 @@ public class DBManager extends SQLiteOpenHelper {
         return  listProvince;
     }
 
+
     public List<Restaurant> getAllRestaurant(){
         List<Restaurant> listRestaurant= new ArrayList<>();
         String selectQuery= "Select * from "+ TABLE2;
@@ -162,6 +186,19 @@ public class DBManager extends SQLiteOpenHelper {
         }
         db.close();
         return  listRestaurant;
+    }
+
+    public Restaurant getRestaurant(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        cursor = db.rawQuery("SELECT * FROM "+TABLE2 +" WHERE id = '" +id +"'",null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Restaurant restaurant = new Restaurant(cursor.getInt(0),cursor.getString(1),cursor.getInt(2),cursor.getString(3),cursor.getInt(4),cursor.getString(5),cursor.getInt(6),cursor.getInt(7),cursor.getInt(8));
+        cursor.close();
+        db.close();
+        return restaurant;
     }
 
     public void backupProvice()

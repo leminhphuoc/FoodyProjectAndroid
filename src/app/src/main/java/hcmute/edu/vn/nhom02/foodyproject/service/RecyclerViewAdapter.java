@@ -19,6 +19,7 @@ import java.util.List;
 
 import hcmute.edu.vn.nhom02.foodyproject.R;
 import hcmute.edu.vn.nhom02.foodyproject.model.Restaurant;
+import hcmute.edu.vn.nhom02.foodyproject.viewmodel.RestaurantDetail;
 import hcmute.edu.vn.nhom02.foodyproject.viewmodel.RestaurantList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
@@ -51,12 +52,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(mContext, RestaurantList.class);
-
+                Intent intent = new Intent(mContext, RestaurantDetail.class);
+                intent.putExtra("RestaurantId",mData.get(position).getId());
                 //passing data to the book activity
-                intent.putExtra("Name",mData.get(position).getName());
-                intent.putExtra("Address",mData.get(position).getLocationId());
-                intent.putExtra("Thumbnail",mData.get(position).getThumbnail());
+//                intent.putExtra("Name",mData.get(position).getName());
+//                intent.putExtra("Address",mData.get(position).getLocationId());
+//                intent.putExtra("Thumbnail",mData.get(position).getThumbnail());
                 //start the activity
                 mContext.startActivity(intent);
             }

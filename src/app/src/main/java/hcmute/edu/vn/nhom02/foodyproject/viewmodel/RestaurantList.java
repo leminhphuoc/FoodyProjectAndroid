@@ -45,7 +45,7 @@ public class RestaurantList extends AppCompatActivity {
         Toast.makeText(this, note + "", Toast.LENGTH_LONG).show();
         lstRestaurant = new ArrayList<>();
         DBManager dbmanager=new DBManager(this);
-        lstRestaurant =dbmanager.getAllRestaurant();
+        lstRestaurant = dbmanager.getAllRestaurant();
         Toast.makeText(this, lstRestaurant.isEmpty() + "", Toast.LENGTH_LONG).show();
         lstRestaurantTest = new ArrayList<>();
         for (int j = 0; j < 20; j++) {

@@ -14,6 +14,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -26,15 +27,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import hcmute.edu.vn.nhom02.foodyproject.data.DBManager;
 import hcmute.edu.vn.nhom02.foodyproject.model.Food;
 import hcmute.edu.vn.nhom02.foodyproject.R;
+import hcmute.edu.vn.nhom02.foodyproject.model.Restaurant;
 import hcmute.edu.vn.nhom02.foodyproject.service.RecylerFoodAdapter;
 
 public class RestaurantDetail extends AppCompatActivity {
 
-    TextView tvDistance;
+    TextView tvDistance, tvResStatus, tvOpenCloseTime;
     List<Food> lstFood;
     Button btnWifi, btnMenu, btnContact;
     private static final int REQUEST_PHONE_CALL = 1;
@@ -105,6 +109,25 @@ public class RestaurantDetail extends AppCompatActivity {
         RecylerFoodAdapter myAdapter = new RecylerFoodAdapter(this, lstFood);
         myrv.setLayoutManager(new GridLayoutManager(this, 2));
         myrv.setAdapter(myAdapter);
+
+        tvResStatus = findViewById(R.id.resStatus);
+        tvOpenCloseTime = findViewById(R.id.resOpenCloseTime);
+
+        Restaurant restaurant = new Restaurant();
+        Intent intent = getIntent();
+        if(intent != null)
+        {
+            int id = intent.getExtras().getInt("RestaurantId");
+            DBManager dbmanager=new DBManager(this);
+            restaurant = dbmanager.getRestaurant(id);
+            Date currentDate = new Date();
+
+            if(restaurant.getTimeOpen() < currentDate.getHours() && restaurant.getTimeClose() > currentDate.getHours())
+            {
+                tvResStatus.setTextColor(Color.parseColor("#149414"));
+                tvResStatus.setText("ĐANG MỞ CỬA");
+            }
+        }
     }
 
     private void showLoginDialog()
