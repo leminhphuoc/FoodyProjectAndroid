@@ -1,41 +1,40 @@
 package hcmute.edu.vn.nhom02.foodyproject.model;
 
 public class Province {
-    private int id;
-    private String name;
-    private String note;
+    private int Id;
+    private String Name;
+    private String Note;
 
     public Province() {
     }
 
     public Province(int id, String name, String note) {
-        this.id = id;
-        this.name = name;
-        this.note = note;
+        Id = id;
+        Name = name;
+        Note = note;
     }
 
-    public Province(String name, String note) {
-        this.name = name;
-        this.note = note;
+    public int getId() {
+        return Id;
     }
 
-    public int getId() {return id;}
-
-    public void setId(int id) {this.id = id;}
-
-    public String getNote() {return note;}
-
-    public void setNote(String note) {this.note = note; }
-
-    public Province(String name) {
-        this.name = name;
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
+    }
+
+    public String getNote() {
+        return Note;
+    }
+
+    public void setNote(String note) {
+        Note = note;
     }
 }

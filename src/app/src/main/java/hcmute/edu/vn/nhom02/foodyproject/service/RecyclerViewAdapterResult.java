@@ -40,8 +40,8 @@ public class RecyclerViewAdapterResult extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.tv_restaurant_name.setText(mData.get(position).getName());
-        holder.tv_restaurant_address.setText(mData.get(position).getAddress());
-        holder.tv_restaurant_type.setText(mData.get(position).getType());
+        holder.tv_restaurant_address.setText(mData.get(position).getLocationId());
+        holder.tv_restaurant_type.setText(mData.get(position).getTagId());
         //holder.img_restaurant_thumbnail.setImageResource(mData.get(position).getThumbnail());
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +51,8 @@ public class RecyclerViewAdapterResult extends RecyclerView.Adapter<RecyclerView
 
                 //passing data to the book activity
                 intent.putExtra("Name",mData.get(position).getName());
-                intent.putExtra("Address",mData.get(position).getAddress());
-                intent.putExtra("Typre",mData.get(position).getType());
+                intent.putExtra("Address",mData.get(position).getLocationId());
+                intent.putExtra("Typre",mData.get(position).getTagId());
                 intent.putExtra("Thumbnail",mData.get(position).getThumbnail());
                 //start the activity
                 mContext.startActivity(intent);

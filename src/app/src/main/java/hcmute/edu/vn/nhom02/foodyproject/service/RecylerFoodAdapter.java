@@ -37,7 +37,7 @@ public class RecylerFoodAdapter extends RecyclerView.Adapter<RecylerFoodAdapter.
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         holder.tv_food_name.setText(mData.get(position).getName());
-        holder.img_food.setImageResource(mData.get(position).getImage());
+        //holder.img_food.setImageResource(mData.get(position).getImage());
     }
 
     @Override

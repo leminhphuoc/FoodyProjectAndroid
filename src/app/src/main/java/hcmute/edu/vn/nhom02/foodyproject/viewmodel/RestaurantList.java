@@ -41,7 +41,7 @@ public class RestaurantList extends AppCompatActivity {
         Toast.makeText(this, note + "", Toast.LENGTH_LONG).show();
         lstRestaurant = new ArrayList<>();
         for (int j = 0; j < 10; j++) {
-            lstRestaurant.add(new Restaurant("Đồ ăn vặt Shin", "128 Phan Trung, P. Tân Tiến, Tp. Biên Hòa, Đồng Nai", "Quán ăn", android_image_urls+note+(j+1)+".jpg"));
+            lstRestaurant.add(new Restaurant(1, "Khang", 1, "", 1, "Ngon", 1, 7, 21));
 
         }
         btnNamePro = (Button) findViewById(R.id.buttonProName);
