@@ -34,11 +34,12 @@ import hcmute.edu.vn.nhom02.foodyproject.data.DBManager;
 import hcmute.edu.vn.nhom02.foodyproject.model.Food;
 import hcmute.edu.vn.nhom02.foodyproject.R;
 import hcmute.edu.vn.nhom02.foodyproject.model.Restaurant;
+import hcmute.edu.vn.nhom02.foodyproject.model.Tag;
 import hcmute.edu.vn.nhom02.foodyproject.service.RecylerFoodAdapter;
 
 public class RestaurantDetail extends AppCompatActivity {
 
-    TextView tvDistance, tvResStatus, tvOpenCloseTime;
+    TextView tvDistance, tvResStatus, tvOpenCloseTime, tvCategoryName;
     List<Food> lstFood;
     Button btnWifi, btnMenu, btnContact;
     private static final int REQUEST_PHONE_CALL = 1;
@@ -112,6 +113,7 @@ public class RestaurantDetail extends AppCompatActivity {
 
         tvResStatus = findViewById(R.id.resStatus);
         tvOpenCloseTime = findViewById(R.id.resOpenCloseTime);
+        tvCategoryName = findViewById(R.id.resCategory);
 
         Restaurant restaurant = new Restaurant();
         Intent intent = getIntent();
@@ -126,6 +128,12 @@ public class RestaurantDetail extends AppCompatActivity {
             {
                 tvResStatus.setTextColor(Color.parseColor("#149414"));
                 tvResStatus.setText("ĐANG MỞ CỬA");
+            }
+
+            if(restaurant.getTagId() != 0)
+            {
+                Tag tag = dbmanager.getTag(restaurant.getTagId());
+                tvCategoryName.setText(tag.getName());
             }
         }
     }

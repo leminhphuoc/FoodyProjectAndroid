@@ -142,6 +142,19 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    public Tag getTag(int id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        cursor = db.rawQuery("SELECT * FROM "+TABLE3 +" WHERE id = '" +id +"'",null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Tag tag = new Tag(cursor.getInt(0),cursor.getString(1));
+        cursor.close();
+        db.close();
+        return tag;
+    }
 
     public List<Province> getAllProvice(){
         List<Province> listProvince= new ArrayList<>();
@@ -161,7 +174,6 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
         return  listProvince;
     }
-
 
     public List<Restaurant> getAllRestaurant(){
         List<Restaurant> listRestaurant= new ArrayList<>();
