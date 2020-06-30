@@ -252,7 +252,7 @@ public class DBManager extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Restaurant restaurant = new Restaurant(cursor.getInt(0),cursor.getString(1),cursor.getInt(2),cursor.getString(3),cursor.getInt(4),cursor.getString(5),cursor.getInt(6),cursor.getInt(7),cursor.getInt(8));
+        Restaurant restaurant = new Restaurant(cursor.getInt(0),cursor.getString(1),cursor.getInt(2),cursor.getString(3),cursor.getInt(4),cursor.getString(5),cursor.getInt(6),cursor.getInt(7),cursor.getInt(8),cursor.getString(9),cursor.getString(10));
         cursor.close();
         db.close();
         return restaurant;
@@ -281,6 +281,86 @@ public class DBManager extends SQLiteOpenHelper {
         }
         db.close();
         return  listRestaurant;
+    }
+
+    public  ArrayList<Food> GetFoodByRestaurant(int resId)
+    {
+        ArrayList<Food> listRestaurant= new ArrayList<>();
+        String selectQuery= "Select * from "+ TABLE7 +" where restaurantId ="+resId;
+
+        SQLiteDatabase db =this.getWritableDatabase();
+        Cursor cursor= db.rawQuery(selectQuery,null);
+        if(cursor.moveToFirst()){
+            do{
+                Food food = new Food();
+                food.setId(cursor.getInt(0));
+                food.setName(cursor.getString(1));
+                food.setPrice(cursor.getDouble(2));
+                food.setImage(cursor.getString(3));
+                food.setRestaurantId(cursor.getInt(4));
+                food.setFoodCategoryId(cursor.getInt(5));
+                listRestaurant.add(food);
+            }while (cursor.moveToNext());
+        }
+        db.close();
+        return  listRestaurant;
+    }
+
+    public  CategoryFood GetCategoryById(int id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        cursor = db.rawQuery("SELECT * FROM "+TABLE6 +" WHERE id = '" +id +"'",null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        CategoryFood category = new CategoryFood(cursor.getInt(0),cursor.getString(1));
+        cursor.close();
+        db.close();
+        return category;
+    }
+
+
+    public int UpdateWifi(Restaurant restaurant)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("wifiName",restaurant.getWifiName());
+        values.put("wifiPassword",restaurant.getWifiPassword());
+
+        return db.update(TABLE2,values,"id =?",new String[] { String.valueOf(restaurant.getId())});
+    }
+
+    public  List<Integer> GetCategoryIdRes(int resId)
+    {
+        List<Integer> listCategoryId = new ArrayList<>();
+        String selectQuery= "SELECT foodCategoryId FROM "+TABLE7 +" WHERE restaurantId = '" +resId +"' GROUP BY foodCategoryId";
+
+        SQLiteDatabase db =this.getWritableDatabase();
+        Cursor cursor= db.rawQuery(selectQuery,null);
+        if(cursor.moveToFirst()){
+            do{
+                int id = cursor.getInt(0);
+                listCategoryId.add(id);
+            }while (cursor.moveToNext());
+        }
+        db.close();
+        return  listCategoryId;
+    }
+
+    public Province GetProvinceById(int id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        cursor = db.rawQuery("SELECT * FROM "+TABLE1 +" WHERE id = '" +id +"'",null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Province province = new Province(cursor.getInt(0),cursor.getString(1),cursor.getString(2));
+        cursor.close();
+        db.close();
+        return province;
     }
 
     public void backupProvice()

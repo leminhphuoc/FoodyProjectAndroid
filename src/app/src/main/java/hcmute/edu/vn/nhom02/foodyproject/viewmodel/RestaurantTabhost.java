@@ -20,10 +20,13 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 
 import hcmute.edu.vn.nhom02.foodyproject.R;
+import hcmute.edu.vn.nhom02.foodyproject.data.DBManager;
+import hcmute.edu.vn.nhom02.foodyproject.model.Restaurant;
 
 public class RestaurantTabhost extends ActivityGroup {
 
     TabHost tabHost;
+    private  int resId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +44,21 @@ public class RestaurantTabhost extends ActivityGroup {
         tabHost = (TabHost) findViewById(android.R.id.tabhost); // initiate TabHost
         tabHost.setup(getLocalActivityManager());
 
-        Intent intent; // Reusable Intent for each tab
+        Intent intent = getIntent(); // Reusable Intent for each tab
+        if(intent != null)
+        {
+            resId = intent.getExtras().getInt("RestaurantId");
+            DBManager dbManager = new DBManager(this);
+            Restaurant restaurant = dbManager.getRestaurant(resId);
+            TextView tvResName = findViewById(R.id.tvResName);
+            tvResName.setText(restaurant.getName());
+        }
 
         TabHost.TabSpec spec1 = tabHost.newTabSpec("image"); // Create a new TabSpec using tab host
         spec1.setIndicator("Ảnh"); // set the “HOME” as an indicator
         // Create an Intent to launch an Activity for the tab (to be reused)
         intent = new Intent(this, RestaurantImageActivity.class);
+        intent.putExtra("RestaurantId",resId);
         spec1.setContent(intent);
         tabHost.addTab(spec1);
 
@@ -54,6 +66,7 @@ public class RestaurantTabhost extends ActivityGroup {
         spec2.setIndicator("Thực đơn"); // set the “CONTACT” as an indicator
         // Create an Intent to launch an Activity for the tab (to be reused)
         intent = new Intent(this, MenuActivity.class);
+        intent.putExtra("RestaurantId",resId);
         spec2.setContent(intent);
         tabHost.addTab(spec2);
         tabHost.setCurrentTab(1);
@@ -62,9 +75,11 @@ public class RestaurantTabhost extends ActivityGroup {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RestaurantTabhost.this, RestaurantDetail.class);
-                startActivity(intent);
+                finish();
             }
         });
+
+
+
     }
 }

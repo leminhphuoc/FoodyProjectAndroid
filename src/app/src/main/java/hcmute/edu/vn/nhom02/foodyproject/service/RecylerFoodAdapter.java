@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import hcmute.edu.vn.nhom02.foodyproject.R;
@@ -37,6 +39,7 @@ public class RecylerFoodAdapter extends RecyclerView.Adapter<RecylerFoodAdapter.
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         holder.tv_food_name.setText(mData.get(position).getName());
+        Picasso.with(mContext).load(mData.get(position).getImage()).resize(180,160).into(holder.img_food);
         //holder.img_food.setImageResource(mData.get(position).getImage());
     }
 

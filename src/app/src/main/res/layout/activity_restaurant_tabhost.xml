@@ -45,6 +45,7 @@
 <!--            android:layout_weight="0" />-->
 
         <TextView
+            android:id="@+id/tvResName"
             android:padding="25px"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

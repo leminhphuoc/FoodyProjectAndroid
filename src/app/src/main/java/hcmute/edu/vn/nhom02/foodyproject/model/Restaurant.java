@@ -31,6 +31,20 @@ public class Restaurant {
         TimeClose = timeClose;
     }
 
+    public Restaurant(int id, String name, int provinceId, String thumbnail, int tagId, String description, int locationId, int timeOpen, int timeClose, String wifiName, String passWifi) {
+        Id = id;
+        Name = name;
+        ProvinceId = provinceId;
+        Thumbnail = thumbnail;
+        TagId = tagId;
+        Description = description;
+        LocationId = locationId;
+        TimeOpen = timeOpen;
+        TimeClose = timeClose;
+        this.wifiName = wifiName;
+        wifiPassword = passWifi;
+    }
+
 
 
     public int getId() {
@@ -103,5 +117,21 @@ public class Restaurant {
 
     public void setTimeClose(int timeClose) {
         TimeClose = timeClose;
+    }
+
+    public String getWifiName() {
+        return wifiName;
+    }
+
+    public void setWifiName(String wifiName) {
+        this.wifiName = wifiName;
+    }
+
+    public String getWifiPassword() {
+        return wifiPassword;
+    }
+
+    public void setWifiPassword(String wifiPassword) {
+        this.wifiPassword = wifiPassword;
     }
 }

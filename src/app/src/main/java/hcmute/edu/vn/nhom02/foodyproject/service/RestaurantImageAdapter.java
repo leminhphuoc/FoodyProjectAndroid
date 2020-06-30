@@ -10,15 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import hcmute.edu.vn.nhom02.foodyproject.R;
+import hcmute.edu.vn.nhom02.foodyproject.model.Food;
 
 public class RestaurantImageAdapter extends RecyclerView.Adapter<RestaurantImageAdapter.ImageViewHolder>  {
     private Context mContext;
-    private List<Integer> mData;
+    private List<Food> mData;
 
-    public RestaurantImageAdapter(Context mContext, List<Integer>  mData) {
+    public RestaurantImageAdapter(Context mContext, List<Food>  mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -35,7 +38,7 @@ public class RestaurantImageAdapter extends RecyclerView.Adapter<RestaurantImage
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantImageAdapter.ImageViewHolder holder, int position) {
-        holder.img_food.setImageResource(mData.get(position));
+        Picasso.with(mContext).load(mData.get(position).getImage()).resize(122,135).into(holder.img_food);
     }
 
     @Override
