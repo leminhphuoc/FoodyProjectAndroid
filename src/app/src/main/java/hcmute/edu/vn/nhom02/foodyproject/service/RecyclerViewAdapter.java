@@ -46,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
         holder.tv_restaurant_name.setText(mData.get(position).getName());
-        Picasso.with(mContext).load(mData.get(position).getThumbnail()).resize(190,140).into(holder.img_restaurant_thumbnail);
+        Picasso.with(mContext).load(mData.get(position).getThumbnail()).resize(180,140).into(holder.img_restaurant_thumbnail);
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

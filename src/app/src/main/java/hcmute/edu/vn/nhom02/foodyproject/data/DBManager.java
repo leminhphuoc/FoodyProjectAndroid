@@ -10,6 +10,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import hcmute.edu.vn.nhom02.foodyproject.model.CategoryFood;
 import hcmute.edu.vn.nhom02.foodyproject.model.Location;
 import hcmute.edu.vn.nhom02.foodyproject.model.Province;
 import hcmute.edu.vn.nhom02.foodyproject.model.Restaurant;
@@ -120,6 +121,16 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void addCategoryFood(CategoryFood categoryFood)
+    {
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues values= new ContentValues( );
+        values.put("name",categoryFood.getName());
+        values.put( "id",categoryFood.getId() );
+        db.insert( TABLE6,null,values );
+        db.close();
+    }
+
     public void addLocation(Location location)
     {
         SQLiteDatabase db= this.getWritableDatabase();
@@ -178,7 +189,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     public List<Restaurant> getRestaurantByProvince(int province){
         List<Restaurant> listRestaurant= new ArrayList<>();
-        String selectQuery= "Select * from "+ TABLE2 +" where provinceId ="+province;
+        String selectQuery= "Select * from "+ TABLE2 +" where provinceId = "+province;
 
         SQLiteDatabase db =this.getWritableDatabase();
         Cursor cursor= db.rawQuery(selectQuery,null);
@@ -205,7 +216,7 @@ public class DBManager extends SQLiteOpenHelper {
     {
         //Province
         addProvince(new Province(1,"An Giang","angiang"));
-        addProvince(new Province(2,"Bà Rịa - Vũng Tàu","vungtau"));
+        addProvince(new Province(2,"Vũng Tàu","vungtau"));
         addProvince(new Province(3,"Bạc Liêu","baclieu"));
         addProvince(new Province(4,"Bắc Giang","bacgiang"));
         addProvince(new Province(5,"Bắc Kạn","backan"));
@@ -260,7 +271,7 @@ public class DBManager extends SQLiteOpenHelper {
         addProvince(new Province(54,"Thái Bình","thaibinh"));
         addProvince(new Province(55,"Thái Nguyên","thainguyen"));
         addProvince(new Province(56,"Thanh Hóa","thanhhoa"));
-        addProvince(new Province(57,"Thừa Thiên - Huế","hue"));
+        addProvince(new Province(57,"Huế","hue"));
         addProvince(new Province(58,"Tiền Giang","tiengiang"));
         addProvince(new Province(59,"Trà Vinh","travinh"));
         addProvince(new Province(60,"Tuyên Quang","tuyenquang"));
@@ -283,16 +294,16 @@ public class DBManager extends SQLiteOpenHelper {
         addRestaurant(new Restaurant(10, "Hamburger Trứng, Thịt Bò & Xúc Xích", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang10.jpg", 1, "Ngon", 10, 7, 21));
 
         //2
-        addRestaurant(new Restaurant(11, "Burger & Club Sandwich Thomas", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vungtau1.jpg", 1, "Ngon", 11, 7, 21));
-        addRestaurant(new Restaurant(12, "Bánh Ngon Vũng Tàu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau2.jpg", 1, "Ngon", 12, 7, 21));
-        addRestaurant(new Restaurant(13, "Ship House", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau3.jpg", 1, "Ngon", 13, 7, 21));
-        addRestaurant(new Restaurant(14, "Tô's Milk Tea & Coffee Shop - Hàn Thuyên", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vungtau4.jpg", 1, "Ngon", 14, 7, 21));
-        addRestaurant(new Restaurant(15, "Royaltea - Trà Sữa Hồng Kông - Trần Phú", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau5.jpg", 1, "Ngon", 15, 7, 21));
-        addRestaurant(new Restaurant(16, "Ship House Oppa", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau6.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(17, "Royaltea - Trà Sữa Hồng Kong - Hoàng Hoa Thám", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vungtau7.jpg", 1, "Ngon", 16, 7, 21));
-        addRestaurant(new Restaurant(18, "Peekaboo - Drink & Food", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau8.jpg", 1, "Ngon", 17, 7, 21));
-        addRestaurant(new Restaurant(19, "Bánh Cuốn Nóng Lá Chuối Quán - Nguyễn Văn Trỗi", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau9.jpg", 1, "Ngon", 18, 7, 21));
-        addRestaurant(new Restaurant(20, "Royaltea - Trà Sữa Hồng Kông - 186 Hoàng Hoa Thám", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau10.jpg", 1, "Ngon", 19, 7, 21));
+        addRestaurant(new Restaurant(11, "Burger & Club Sandwich Thomas", 2, "https://fondekao.azurewebsites.net/Asset/Client/images/vungtau1.jpg", 1, "Ngon", 11, 7, 21));
+        addRestaurant(new Restaurant(12, "Bánh Ngon Vũng Tàu", 2,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau2.jpg", 1, "Ngon", 12, 7, 21));
+        addRestaurant(new Restaurant(13, "Ship House", 2,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau3.jpg", 1, "Ngon", 13, 7, 21));
+        addRestaurant(new Restaurant(14, "Tô's Milk Tea & Coffee Shop - Hàn Thuyên", 2, "https://fondekao.azurewebsites.net/Asset/Client/images/vungtau4.jpg", 1, "Ngon", 14, 7, 21));
+        addRestaurant(new Restaurant(15, "Royaltea - Trà Sữa Hồng Kông - Trần Phú", 2,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau5.jpg", 1, "Ngon", 15, 7, 21));
+        addRestaurant(new Restaurant(16, "Ship House Oppa", 2,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau6.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(17, "Royaltea - Trà Sữa Hồng Kong - Hoàng Hoa Thám", 2, "https://fondekao.azurewebsites.net/Asset/Client/images/vungtau7.jpg", 1, "Ngon", 16, 7, 21));
+        addRestaurant(new Restaurant(18, "Peekaboo - Drink & Food", 2,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau8.jpg", 1, "Ngon", 17, 7, 21));
+        addRestaurant(new Restaurant(19, "Bánh Cuốn Nóng Lá Chuối Quán - Nguyễn Văn Trỗi", 2,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau9.jpg", 1, "Ngon", 18, 7, 21));
+        addRestaurant(new Restaurant(20, "Royaltea - Trà Sữa Hồng Kông - 186 Hoàng Hoa Thám", 2,"https://fondekao.azurewebsites.net/Asset/Client/images/vungtau10.jpg", 1, "Ngon", 19, 7, 21));
 
         //3
         addRestaurant(new Restaurant(21, "Băng Tâm - Bún Xào Nem Nướng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/baclieu1.jpg", 1, "Ngon", 1, 7, 21));
@@ -1027,12 +1038,41 @@ public class DBManager extends SQLiteOpenHelper {
         addRestaurant(new Restaurant(640, "Bít Tết Ngon - Trần Phú", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai10.jpg", 1, "Ngon", 1, 7, 21));
 
         //Tag
-        addTag(new Tag(1, "Quán ăn"));
-        addTag(new Tag(2, "Nhà hàng"));
-        addTag(new Tag(3, "Cà phê"));
-        addTag(new Tag(4, "Vỉa hè"));
-        addTag(new Tag(5, "Ăn vặt"));
-        addTag(new Tag(6, "Quán nước"));
+        addTag( new Tag(1,"Quán ăn") );
+        addTag( new Tag(2,"Nhà hàng") );
+        addTag( new Tag(3,"Cửa hàng tiện lợi") );
+        addTag( new Tag(4,"Quán nhậu"));
+        addTag( new Tag(5, "Quầy thức ăn nhanh"));
+        addTag( new Tag(6,"Quán thức ăn vặt"));
+        addTag( new Tag(7,"Quán nước"));
+        addTag( new Tag(8,"Quán cà phê"));
+        addTag( new Tag(9,"Quán vỉa hè") );
+
+        //CategoryFood
+        addCategoryFood( new CategoryFood(  1,"Món Lẩu") );
+        addCategoryFood( new CategoryFood(2,"Hải Sản" ));
+        addCategoryFood( new CategoryFood(3,"Món Chiên"));
+        addCategoryFood( new CategoryFood(4,"Món Nướng" ));
+        addCategoryFood( new CategoryFood(5,"Món Xào" ));
+        addCategoryFood( new CategoryFood(6,"Món Chay" ));
+        addCategoryFood( new CategoryFood( 7,"Nước Ngọt" ));
+        addCategoryFood( new CategoryFood(8,"Bia" ));
+        addCategoryFood( new CategoryFood(9,"Xôi lẻ" ));
+        addCategoryFood( new CategoryFood(10,"Món ăn kèm" ));
+        addCategoryFood( new CategoryFood(11,"Cà Phê- Trà" ));
+        addCategoryFood( new CategoryFood(12,"Nước ép " ));
+        addCategoryFood( new CategoryFood(13,"Thức ăn nhanh " ));
+        addCategoryFood( new CategoryFood(14,"Món bò" ));
+        addCategoryFood( new CategoryFood(15,"Sushi" ));
+        addCategoryFood( new CategoryFood(16,"Mì phở " ));
+        addCategoryFood( new CategoryFood(17,"Cơm hộp" ));
+        addCategoryFood( new CategoryFood(18,"Trứng chiên" ));
+        addCategoryFood( new CategoryFood(19,"Tráng miệng" ));
+        addCategoryFood( new CategoryFood(20,"Pizza" ));
+        addCategoryFood( new CategoryFood(21,"Thịt/ trứng" ));
+        addCategoryFood( new CategoryFood(22,"Gia Vị" ));
+        addCategoryFood( new CategoryFood(23,"Đồ uống/ Ăn vặt" ));
+        addCategoryFood( new CategoryFood(24,"Homemade" ));
 
         //Location
         //1

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -21,10 +22,8 @@ public class RestaurantList extends AppCompatActivity {
 
     List<Restaurant> lstRestaurant;
     List<Restaurant> lstRestaurantTest;
-    String note;
+    int provinceId;
     Button btnNamePro;
-
-
 
     private final  String android_image_urls=
             "https://fondekao.azurewebsites.net/Asset/Client/images/";
@@ -34,27 +33,28 @@ public class RestaurantList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_list);
 
-
         Intent intent = getIntent();
-        note = intent.getStringExtra("Noteee");
-
-        //copy ham getAll ben province
-        //chuyen dong nay qua result
-        //select random limit 20 de load ngau nhien trang home
-        Toast.makeText(this, note + "", Toast.LENGTH_LONG).show();
+        provinceId = intent.getIntExtra("ProvinceIddd", 1);
+        Toast.makeText(this, provinceId + "", Toast.LENGTH_LONG).show();
         lstRestaurant = new ArrayList<>();
         DBManager dbmanager=new DBManager(this);
-        lstRestaurant =dbmanager.getAllRestaurant();
-        Toast.makeText(this, lstRestaurant.isEmpty() + "", Toast.LENGTH_LONG).show();
-        lstRestaurantTest = new ArrayList<>();
-        for (int j = 0; j < 20; j++) {
-            lstRestaurantTest.add(lstRestaurant.get(j));
-        }
+        lstRestaurant =dbmanager.getRestaurantByProvince(provinceId);
         btnNamePro = (Button) findViewById(R.id.buttonProName);
-        btnNamePro.setText(intent.getStringExtra("ProNameee"));
+        btnNamePro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentProvince = new Intent(RestaurantList.this, ProvinceList.class);
+                startActivity(intentProvince);
+            }
+        });
+        String nameProvince = intent.getStringExtra("ProNameee");
+        if (nameProvince != null){
+            btnNamePro.setText(nameProvince);
+        }
         RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerview_id);
-        RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this, lstRestaurantTest);
+        RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this, lstRestaurant);
         myrv.setLayoutManager(new GridLayoutManager(this, 2));
         myrv.setAdapter(myAdapter);
+        Toast.makeText(this, provinceId + "", Toast.LENGTH_LONG).show();
     }
 }
