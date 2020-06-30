@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +37,7 @@ public class RestaurantDetail extends AppCompatActivity {
     TextView tvDistance;
     List<Food> lstFood;
     Button btnWifi, btnMenu, btnContact;
+    private static final int REQUEST_PHONE_CALL = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +80,16 @@ public class RestaurantDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent callIntent = new Intent();
-                callIntent.setAction(Intent.ACTION_CALL);
+                callIntent.setAction(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:0978373449"));
-                startActivity(callIntent);
+                if (ContextCompat.checkSelfPermission(RestaurantDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(RestaurantDetail.this, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+                }
+                else
+                {
+                    startActivity(callIntent);
+                }
+
             }
         });
 
