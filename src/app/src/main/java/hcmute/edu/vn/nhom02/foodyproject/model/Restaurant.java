@@ -12,6 +12,8 @@ public class Restaurant {
     private int LocationId;
     private int TimeOpen;
     private int TimeClose;
+    private String wifiName;
+    private String wifiPassword;
 
 
     public Restaurant() {

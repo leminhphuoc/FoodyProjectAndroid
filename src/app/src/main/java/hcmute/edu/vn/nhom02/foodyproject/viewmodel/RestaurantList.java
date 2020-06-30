@@ -41,7 +41,6 @@ public class RestaurantList extends AppCompatActivity {
         //copy ham getAll ben province
         //chuyen dong nay qua result
         //select random limit 20 de load ngau nhien trang home
-
         Toast.makeText(this, note + "", Toast.LENGTH_LONG).show();
         lstRestaurant = new ArrayList<>();
         DBManager dbmanager=new DBManager(this);
