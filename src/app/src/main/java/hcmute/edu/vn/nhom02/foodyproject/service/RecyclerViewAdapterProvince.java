@@ -59,7 +59,7 @@ public class RecyclerViewAdapterProvince extends RecyclerView.Adapter<RecyclerVi
                     holder.tv_province_name.setTextColor(Color.BLUE);
                     Intent intent = new Intent(mContext, RestaurantList.class);
                     //passing data to the book activity
-                    intent.putExtra("Noteee",mData.get(position).getNote());
+                    intent.putExtra("ProvinceIddd",mData.get(position).getId());
                     intent.putExtra("ProNameee",mData.get(position).getName());
                     //start the activity
                     mContext.startActivity(intent);
