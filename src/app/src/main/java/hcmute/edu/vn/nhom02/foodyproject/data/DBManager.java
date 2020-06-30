@@ -143,6 +143,18 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void addLocation(Location location)
+    {
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues values= new ContentValues( );
+        values.put("id",location.getId());
+        values.put("name",location.getName());
+        values.put("latitude",location.getLatitude());
+        values.put("longitude",location.getLongitude());
+        db.insert( TABLE5,null,values );
+        db.close();
+    }
+
     public Tag getTag(int id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
