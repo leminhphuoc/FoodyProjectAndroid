@@ -12,6 +12,7 @@ import java.util.List;
 
 import hcmute.edu.vn.nhom02.foodyproject.model.Province;
 import hcmute.edu.vn.nhom02.foodyproject.model.Restaurant;
+import hcmute.edu.vn.nhom02.foodyproject.model.Tag;
 
 public class DBManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="foodydb";
@@ -108,6 +109,16 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void addTag(Tag tag)
+    {
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues values= new ContentValues( );
+        values.put("name",tag.getName());
+        values.put( "id",tag.getId() );
+        db.insert( TABLE3,null,values );
+        db.close();
+    }
+
 
     public List<Province> getAllProvice(){
         List<Province> listProvince= new ArrayList<>();
@@ -126,6 +137,31 @@ public class DBManager extends SQLiteOpenHelper {
         }
         db.close();
         return  listProvince;
+    }
+
+    public List<Restaurant> getAllRestaurant(){
+        List<Restaurant> listRestaurant= new ArrayList<>();
+        String selectQuery= "Select * from "+ TABLE2;
+
+        SQLiteDatabase db =this.getWritableDatabase();
+        Cursor cursor= db.rawQuery(selectQuery,null);
+        if(cursor.moveToFirst()){
+            do{
+                Restaurant restaurant = new Restaurant();
+                restaurant.setId(cursor.getInt(0));
+                restaurant.setName(cursor.getString(1));
+                restaurant.setProvinceId(cursor.getInt(2));
+                restaurant.setThumbnail(cursor.getString(3));
+                restaurant.setTagId(cursor.getInt(4));
+                restaurant.setDescription(cursor.getString(5));
+                restaurant.setLocationId(cursor.getInt(6));
+                restaurant.setTimeOpen(cursor.getInt(7));
+                restaurant.setTimeOpen(cursor.getInt(7));
+                listRestaurant.add(restaurant);
+            }while (cursor.moveToNext());
+        }
+        db.close();
+        return  listRestaurant;
     }
 
     public void backupProvice()
@@ -199,15 +235,15 @@ public class DBManager extends SQLiteOpenHelper {
 
         //1
         addRestaurant(new Restaurant(1, "Nhà Hàng Dimsum Nam Đào Viên", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/angiang1.jpg", 1, "Ngon", 1, 6, 22));
-        addRestaurant(new Restaurant(2, "Cơm Gà Xối Mỡ Hồng Nhung 2", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang1.jpg", 1, "Ngon", 2, 7, 21));
-        addRestaurant(new Restaurant(3, "Quán Ốc Mía", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang1.jpg", 1, "Ngon", 3, 7, 21));
-        addRestaurant(new Restaurant(4, "Bò Bít Tết Cửu Long", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/angiang1.jpg", 1, "Ngon", 4, 7, 21));
-        addRestaurant(new Restaurant(5, "Bánh Canh Tép", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang1.jpg", 1, "Ngon", 5, 7, 21));
-        addRestaurant(new Restaurant(6, "Hoàng Oanh Bakery - Tôn Đức Thắng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang1.jpg", 1, "Ngon", 6, 7, 21));
-        addRestaurant(new Restaurant(7, "Cơm Duy", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/angiang1.jpg", 1, "Ngon", 7, 7, 21));
-        addRestaurant(new Restaurant(8, "Quán Cơm & Bánh Canh Hẻm 12 - Tri Tôn", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang1.jpg", 1, "Ngon", 8, 7, 21));
-        addRestaurant(new Restaurant(9, "Lavender Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang1.jpg", 1, "Ngon", 9, 7, 21));
-        addRestaurant(new Restaurant(10, "Hamburger Trứng, Thịt Bò & Xúc Xích", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang1.jpg", 1, "Ngon", 10, 7, 21));
+        addRestaurant(new Restaurant(2, "Cơm Gà Xối Mỡ Hồng Nhung 2", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang2.jpg", 1, "Ngon", 2, 7, 21));
+        addRestaurant(new Restaurant(3, "Quán Ốc Mía", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang3.jpg", 1, "Ngon", 3, 7, 21));
+        addRestaurant(new Restaurant(4, "Bò Bít Tết Cửu Long", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/angiang4.jpg", 1, "Ngon", 4, 7, 21));
+        addRestaurant(new Restaurant(5, "Bánh Canh Tép", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang5.jpg", 1, "Ngon", 5, 7, 21));
+        addRestaurant(new Restaurant(6, "Hoàng Oanh Bakery - Tôn Đức Thắng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang6.jpg", 1, "Ngon", 6, 7, 21));
+        addRestaurant(new Restaurant(7, "Cơm Duy", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/angiang7.jpg", 1, "Ngon", 7, 7, 21));
+        addRestaurant(new Restaurant(8, "Quán Cơm & Bánh Canh Hẻm 12 - Tri Tôn", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang8.jpg", 1, "Ngon", 8, 7, 21));
+        addRestaurant(new Restaurant(9, "Lavender Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang9.jpg", 1, "Ngon", 9, 7, 21));
+        addRestaurant(new Restaurant(10, "Hamburger Trứng, Thịt Bò & Xúc Xích", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang10.jpg", 1, "Ngon", 10, 7, 21));
 
         //2
         addRestaurant(new Restaurant(11, "Burger & Club Sandwich Thomas", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vungtau.jpg", 1, "Ngon", 11, 7, 21));
@@ -666,292 +702,300 @@ public class DBManager extends SQLiteOpenHelper {
         addRestaurant(new Restaurant(400, "Lẩu & Nướng Cá Chèo Bẻo", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/longan.jpg", 1, "Ngon", 1, 7, 21));
 
         //40
-        addRestaurant(new Restaurant(1, "K-Pub - Nướng Phong Cách Pub Hàn Quốc - Khu Độ Thị Dệt May", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Chè 5000", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bánh Cuốn Độ Ngần - Quang Trung", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Mươi Phệ - Lẩu, Hải Sản", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Tửu Lầu Nam Định", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Cô Năm - Chuyên Gà Ác Tần", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Chợ Hải Sản Vân Đồn", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Quán Lá Chợ Phiên", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Cửa Đông Nam Định Plaza - Ẩm Thực Châu Á", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Highlands Coffee - Nam Định Tower", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(401, "K-Pub - Nướng Phong Cách Pub Hàn Quốc - Khu Độ Thị Dệt May", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(402, "Chè 5000", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(403, "Bánh Cuốn Độ Ngần - Quang Trung", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(404, "Mươi Phệ - Lẩu, Hải Sản", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(405, "Tửu Lầu Nam Định", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(406, "Cô Năm - Chuyên Gà Ác Tần", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(407, "Chợ Hải Sản Vân Đồn", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(408, "Quán Lá Chợ Phiên", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(409, "Cửa Đông Nam Định Plaza - Ẩm Thực Châu Á", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(410, "Highlands Coffee - Nam Định Tower", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/namdinh.jpg", 1, "Ngon", 1, 7, 21));
 
         //41
-        addRestaurant(new Restaurant(1, "Trà Sữa Toocha - TTTM Vinh Center", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Miele Pane - Tiệm Bánh Mì & Xôi - Nguyễn Đức Cảnh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nghệ’s Pizza, Fastfood & Milk Tea", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Cô Ba Hamburger - Food & Drinks", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Bánh Tráng Cuốn Thịt Heo - Quán Tấm CS2", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Hoa Sen Quán - Tiệm Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Trà Sữa Heekcaa - Lê Hồng Phong", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Bếp Nhà - Cơm Văn Phòng Online", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Trà Sữa Sinh Tea - Shop Online", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Sumi - Thiên Đường Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(411, "Trà Sữa Toocha - TTTM Vinh Center", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(412, "Miele Pane - Tiệm Bánh Mì & Xôi - Nguyễn Đức Cảnh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(413, "Nghệ’s Pizza, Fastfood & Milk Tea", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(414, "Cô Ba Hamburger - Food & Drinks", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(415, "Bánh Tráng Cuốn Thịt Heo - Quán Tấm CS2", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(416, "Hoa Sen Quán - Tiệm Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(417, "Trà Sữa Heekcaa - Lê Hồng Phong", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(418, "Bếp Nhà - Cơm Văn Phòng Online", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(419, "Trà Sữa Sinh Tea - Shop Online", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(420, "Sumi - Thiên Đường Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/nghean.jpg", 1, "Ngon", 1, 7, 21));
 
         //42
-        addRestaurant(new Restaurant(1, "Kichi Kichi Lẩu Băng Chuyền - Lương Văn Thăng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Hương Béo - Bún Đậu & Chè Hoa Cau", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Chợ Quê Quán - Ẩm Thực Vùng Miền", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Xanh Quán - Drink & Fastfood", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Đức Trọc - Bánh Tôm, Thịt Nướng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Trà Sữa Tocotoco - Lương Văn Tụy", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Việt Tộp - Đồ Ăn Vặt & Lẩu Các Loại", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Mỹ Hạnh Quán - Bún & Phở", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Tý Hói - Dê Núi Các Món", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Thanh Hằng - Kem Xôi", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(421, "Kichi Kichi Lẩu Băng Chuyền - Lương Văn Thăng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(422, "Hương Béo - Bún Đậu & Chè Hoa Cau", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(423, "Chợ Quê Quán - Ẩm Thực Vùng Miền", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(424, "Xanh Quán - Drink & Fastfood", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(425, "Đức Trọc - Bánh Tôm, Thịt Nướng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(426, "Trà Sữa Tocotoco - Lương Văn Tụy", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(427, "Việt Tộp - Đồ Ăn Vặt & Lẩu Các Loại", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(428, "Mỹ Hạnh Quán - Bún & Phở", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(429, "Tý Hói - Dê Núi Các Món", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(430, "Thanh Hằng - Kem Xôi", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh.jpg", 1, "Ngon", 1, 7, 21));
 
         //43
-        addRestaurant(new Restaurant(1, "An Đông Quán - Nhậu Bình Dân", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Thủy Tiên - Hải Sản Tươi Sống", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Phong Ký - Quán Ăn Sân Vườn", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Chốn Quê", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Quán Dê Núi Hương Sơn", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Ba Cây Cau - Quán Nhậu Bình Dân", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Phan Rang Beer Garden", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Thiên Ân Quán - Trà Sữa, Kem Tuyết, & Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Lẩu Bò Sáu Hét", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Mì Cay Minchu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(431, "An Đông Quán - Nhậu Bình Dân", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(432, "Thủy Tiên - Hải Sản Tươi Sống", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(433, "Phong Ký - Quán Ăn Sân Vườn", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(434, "Chốn Quê", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(435, "Quán Dê Núi Hương Sơn", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(436, "Ba Cây Cau - Quán Nhậu Bình Dân", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(437, "Phan Rang Beer Garden", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(438, "Thiên Ân Quán - Trà Sữa, Kem Tuyết, & Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(439, "Lẩu Bò Sáu Hét", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(440, "Mì Cay Minchu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhthuan.jpg", 1, "Ngon", 1, 7, 21));
 
         //44
-        addRestaurant(new Restaurant(1, "GoGi House - Nướng Hàn Quốc - Việt Lâm Plaza", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Ha Noi Corner Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Lẩu 88 - Vincom Việt Trì", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Lotteria - Big C Việt Trì", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Nhà hàng Đức Thụ - Lẩu Cua Đệ Nhất - Các Món Ăn Truyền Thống", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Taster's BBQ", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Sữa Chua Dr.Dẻo - Hòa Phong", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Chả & Lẩu Cá Lăng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Ding Tea - Hùng Vương", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Kichi Kichi Lẩu Băng Chuyền - Việt Trì", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(441, "GoGi House - Nướng Hàn Quốc - Việt Lâm Plaza", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(442, "Ha Noi Corner Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(443, "Lẩu 88 - Vincom Việt Trì", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(444, "Lotteria - Big C Việt Trì", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(445, "Nhà hàng Đức Thụ - Lẩu Cua Đệ Nhất - Các Món Ăn Truyền Thống", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(446, "Taster's BBQ", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(447, "Sữa Chua Dr.Dẻo - Hòa Phong", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(448, "Chả & Lẩu Cá Lăng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(449, "Ding Tea - Hùng Vương", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(450, "Kichi Kichi Lẩu Băng Chuyền - Việt Trì", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phutho.jpg", 1, "Ngon", 1, 7, 21));
 
         //45
-        addRestaurant(new Restaurant(1, "Hải Sản Bồng Bềnh", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Mon - Quán Mì Cay", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bánh Bèo Nóng & Bánh Canh Chả Cá", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Tàu Hũ Bánh Lọt", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Suka Quán - Lẩu & Nướng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nhậu Bình Dân Ku Ben", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Ô Loan Quán - Hải Sản Tươi Sống", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Hải Sản Kim Thoa", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Quán Ốc - Hùng Vương", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Classic Cafe - Nguyễn Huệ", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(451, "Hải Sản Bồng Bềnh", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(452, "Mon - Quán Mì Cay", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(453, "Bánh Bèo Nóng & Bánh Canh Chả Cá", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(454, "Tàu Hũ Bánh Lọt", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(455, "Suka Quán - Lẩu & Nướng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(456, "Nhậu Bình Dân Ku Ben", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(457, "Ô Loan Quán - Hải Sản Tươi Sống", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(458, "Hải Sản Kim Thoa", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(459, "Quán Ốc - Hùng Vương", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(460, "Classic Cafe - Nguyễn Huệ", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/phuyen.jpg", 1, "Ngon", 1, 7, 21));
 
         //46
-        addRestaurant(new Restaurant(1, "Trà Chanh Nhím - Trần Phú", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Trà Sữa TocoToco - Vincom Plaza", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bún Phong Phú", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "QB Bar & Restaurant", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "QB Bar - Fast Food", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Chang Chang Quán - Món Việt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "May Food - Ăn Vặt", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Ố Ồ Lake Silence Bar", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bún Bò Huế Hoa", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "T-Home Milk Tea & Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(461, "Trà Chanh Nhím - Trần Phú", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(462, "Trà Sữa TocoToco - Vincom Plaza", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(463, "Bún Phong Phú", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(464, "QB Bar & Restaurant", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(465, "QB Bar - Fast Food", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(466, "Chang Chang Quán - Món Việt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(467, "May Food - Ăn Vặt", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(468, "Ố Ồ Lake Silence Bar", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(469, "Bún Bò Huế Hoa", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(470, "T-Home Milk Tea & Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangbinh.jpg", 1, "Ngon", 1, 7, 21));
 
         //47
-        addRestaurant(new Restaurant(1, "Quán Cơm Phố Hội 426", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Mr Chef Hoi An", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Pizza Amino", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Hi King Coffee", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Driftwood Pizza - Nguyễn Phan Vinh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "VHouse - Coffee & Milk Tea", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Kem Bơ Sisters", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Avos & Mango", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Trà Sữa Đỉnh - Hội An", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "L'amour Hội An - Coffee & Dessert", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(471, "Quán Cơm Phố Hội 426", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(472, "Mr Chef Hoi An", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(473, "Pizza Amino", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(474, "Hi King Coffee", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(475, "Driftwood Pizza - Nguyễn Phan Vinh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(476, "VHouse - Coffee & Milk Tea", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(477, "Kem Bơ Sisters", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(478, "Avos & Mango", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(479, "Trà Sữa Đỉnh - Hội An", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(480, "L'amour Hội An - Coffee & Dessert", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangnam.jpg", 1, "Ngon", 1, 7, 21));
 
         //48
-        addRestaurant(new Restaurant(1, "Nhà Hàng Bình Sơn - Khu Kinh Tế Dung Quất", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Út Ngọc - Cơm Hải Sản Bình Dân", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Rio Cafe", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Nhà Bè Hòn Ngọc - Nhà Hàng Hải Sản", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Lý Sơn Center Cafe", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Ram Cá - Lê Trung Đình", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Mì Hàn Ajuma", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Gà Chỉ Vườn Xanh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Cơm Chay Hoàng Kim", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Việt Chay Sala", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(481, "Nhà Hàng Bình Sơn - Khu Kinh Tế Dung Quất", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(482, "Út Ngọc - Cơm Hải Sản Bình Dân", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(483, "Rio Cafe", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(484, "Nhà Bè Hòn Ngọc - Nhà Hàng Hải Sản", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(485, "Lý Sơn Center Cafe", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(486, "Ram Cá - Lê Trung Đình", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(487, "Mì Hàn Ajuma", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(488, "Gà Chỉ Vườn Xanh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(489, "Cơm Chay Hoàng Kim", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(490, "Việt Chay Sala", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai.jpg", 1, "Ngon", 1, 7, 21));
 
         //49
-        addRestaurant(new Restaurant(1, "Phúc Lộc Thọ - Lẩu & Nướng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Đồ Nướng 89", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nam Trung - Ẩm Thực Trung Hoa", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "MMA - Cafe & Bánh Mì Chảo", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Bò Sính - Cao Thắng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bún Chả Cô Hường", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Trà Sữa Tocotoco - Nguyễn Du", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Lotteria - Big C Hạ Long", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Cơm Ngon Hạ Long", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Hải Sản Thủy Chung", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(491, "Phúc Lộc Thọ - Lẩu & Nướng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(492, "Đồ Nướng 89", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(493, "Nam Trung - Ẩm Thực Trung Hoa", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(494, "MMA - Cafe & Bánh Mì Chảo", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(495, "Bò Sính - Cao Thắng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(496, "Bún Chả Cô Hường", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(497, "Trà Sữa Tocotoco - Nguyễn Du", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(498, "Lotteria - Big C Hạ Long", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(499, "Cơm Ngon Hạ Long", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(500, "Hải Sản Thủy Chung", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangninh.jpg", 1, "Ngon", 1, 7, 21));
 
         //50
-        addRestaurant(new Restaurant(1, "Trung Tâm Ẩm Thực Đông Dương", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Mbeer - Beer Club", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Sinh Tố Thìn Hiệp", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Dream Cakes", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "May Cafe", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nướng Cay 156", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Quán Thu Thủy - Cháo Bột Cá & Vịt", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Hẻm - Bánh Tráng Cuốn Thịt Heo", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Thế Giới Ốc - Nướng Ngói & Lẩu Vị Thái", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Liễu Quán - Bún Chả Cua", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(501, "Trung Tâm Ẩm Thực Đông Dương", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(502, "Mbeer - Beer Club", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(503, "Sinh Tố Thìn Hiệp", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(504, "Dream Cakes", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(505, "May Cafe", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(506, "Nướng Cay 156", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(507, "Quán Thu Thủy - Cháo Bột Cá & Vịt", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(508, "Hẻm - Bánh Tráng Cuốn Thịt Heo", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(509, "Thế Giới Ốc - Nướng Ngói & Lẩu Vị Thái", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(510, "Liễu Quán - Bún Chả Cua", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri.jpg", 1, "Ngon", 1, 7, 21));
 
         //51
-        addRestaurant(new Restaurant(1, "Ken Quán", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Jollibee - Lý Thường Kiệt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Năm Sánh 83 - Bò Tơ Tây Ninh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Bim - Tea, Juice & Bakery", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Bún Gỏi Dà", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Lotteria - Trần Hưng Đạ", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Bún Nước Lèo Cá Đồng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Trà Sữa Cỏ 3 Lá - Nguyễn Thị Minh Khai", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nhà Hàng Khu Du Lịch Chùa Dơi - Văn Ngọc Chính", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Hama's Milk Tea", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(511, "Ken Quán", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(512, "Jollibee - Lý Thường Kiệt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(513, "Năm Sánh 83 - Bò Tơ Tây Ninh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(514, "Bim - Tea, Juice & Bakery", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(515, "Bún Gỏi Dà", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(516, "Lotteria - Trần Hưng Đạ", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(517, "Bún Nước Lèo Cá Đồng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(518, "Trà Sữa Cỏ 3 Lá - Nguyễn Thị Minh Khai", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(519, "Nhà Hàng Khu Du Lịch Chùa Dơi - Văn Ngọc Chính", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(520, "Hama's Milk Tea", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/soctrang.jpg", 1, "Ngon", 1, 7, 21));
 
         //52
-        addRestaurant(new Restaurant(1, "Quán Tuân Gù - Đặc Sản Tây Bắc", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Minh Hằng Cafe", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Xuân Bắc 181 - Đặc Sản Bê Chao & Cá Suối Nướng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Gà & Cá Nướng - Đặc Sản Tây Bắc", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Ngọc Mỹ - Bánh Bao 388", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Milu Coffee - Trà Sữa & Đồ Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Nướng 123", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Ding Tea - Mộc Châu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Royaltea Sơn La", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nhà Hàng Rừng Vàng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(521, "Quán Tuân Gù - Đặc Sản Tây Bắc", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(522, "Minh Hằng Cafe", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(523, "Xuân Bắc 181 - Đặc Sản Bê Chao & Cá Suối Nướng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(524, "Gà & Cá Nướng - Đặc Sản Tây Bắc", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(525, "Ngọc Mỹ - Bánh Bao 388", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(526, "Milu Coffee - Trà Sữa & Đồ Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(527, "Nướng 123", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(528, "Ding Tea - Mộc Châu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(529, "Royaltea Sơn La", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(530, "Nhà Hàng Rừng Vàng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/sonla.jpg", 1, "Ngon", 1, 7, 21));
 
         //53
-        addRestaurant(new Restaurant(1, "Năm Dung - Bánh Canh Trảng Bàng Tây Ninh", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Nàng Hường - Bún Mắm, Phở Bò & Bò Kho", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bánh Canh Năm Hồng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Bánh Canh Bà Ly 2", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Bánh Canh Ghẹ", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bánh Tráng Mẹt Gò Dầu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Bánh Tráng Mẹt Gò Dầu", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Quán Hải Sản Dũng Thắm", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Y.A.M.A Coffee Tea & Dessert - Hùng Vương", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Home Coffee - Đường Số 13", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(531, "Năm Dung - Bánh Canh Trảng Bàng Tây Ninh", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(532, "Nàng Hường - Bún Mắm, Phở Bò & Bò Kho", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(533, "Bánh Canh Năm Hồng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(534, "Bánh Canh Bà Ly 2", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(535, "Bánh Canh Ghẹ", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(536, "Bánh Tráng Mẹt Gò Dầu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(537, "Bánh Tráng Mẹt Gò Dầu", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(538, "Quán Hải Sản Dũng Thắm", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(539, "Y.A.M.A Coffee Tea & Dessert - Hùng Vương", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(540, "Home Coffee - Đường Số 13", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh.jpg", 1, "Ngon", 1, 7, 21));
 
         //54
-        addRestaurant(new Restaurant(1, "GoGi House - Nướng Hàn Quốc - Vincom Lý Bôn", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Times Square Coffee - Lê Lợi", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Five Star Vietnam - Phan Bá Vành", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Royaltea Taipei - Thái Bình", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Jollibee - Lý Bôn", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Icha - Milk Tea & Fastfood", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Bánh Mì Huế - Lý Thường Kiệt", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Nhà Hàng Hải Đăng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Cơm Tám, Gà Rang", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Hana Hàn Quốc", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(541, "GoGi House - Nướng Hàn Quốc - Vincom Lý Bôn", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(542, "Times Square Coffee - Lê Lợi", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(543, "Five Star Vietnam - Phan Bá Vành", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(544, "Royaltea Taipei - Thái Bình", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(545, "Jollibee - Lý Bôn", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(546, "Icha - Milk Tea & Fastfood", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(547, "Bánh Mì Huế - Lý Thường Kiệt", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(548, "Nhà Hàng Hải Đăng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(559, "Cơm Tám, Gà Rang", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(550, "Hana Hàn Quốc", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh.jpg", 1, "Ngon", 1, 7, 21));
 
         //55
-        addRestaurant(new Restaurant(1, "Trà Sữa Guo Cha - Đường Z115", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Sữa Chua Trân Châu Hà Nội - Minh Cầu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Cha Go Tea & Caf'e - Thái Nguyên", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Tiger Tea - Tiệm Trà Sữa Tươi Đường Nâu", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Cộng Caphe - Vincom Plaza", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "GoGi House - Nướng Hàn Quốc", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Mi Cay Seoul Phổ Yên", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Quán Cá Bờ Sông Phiến Hoan Việt Trì", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Sojuko - Buffet Nướng Hàn Quốc", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Hải Nghị - Bún Chả", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(551, "Trà Sữa Guo Cha - Đường Z115", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(552, "Sữa Chua Trân Châu Hà Nội - Minh Cầu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(553, "Cha Go Tea & Caf'e - Thái Nguyên", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(554, "Tiger Tea - Tiệm Trà Sữa Tươi Đường Nâu", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(555, "Cộng Caphe - Vincom Plaza", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(556, "GoGi House - Nướng Hàn Quốc", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(557, "Mi Cay Seoul Phổ Yên", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(558, "Quán Cá Bờ Sông Phiến Hoan Việt Trì", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(559, "Sojuko - Buffet Nướng Hàn Quốc", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(560, "Hải Nghị - Bún Chả", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen.jpg", 1, "Ngon", 1, 7, 21));
 
         //56
-        addRestaurant(new Restaurant(1, "Phương Nguyên - Chả Tôm, Chả Phỏng & Bánh Khoái Tép", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Cô Oanh - Bánh Khoái Tép", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bánh Khoái Tép", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Bà Xuân - Bún Chả Đêm", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Bánh Khoái Bà Ly", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bà Xuân - Chả Tôm", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Thanh Thông - Chả Tôm Hải Phòng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Chả Tôm Cô Hồng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Khoa Xuyến - Bánh Cuốn & Bánh Xèo", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Quán 23 - Bánh Cuốn", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(561, "Phương Nguyên - Chả Tôm, Chả Phỏng & Bánh Khoái Tép", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(562, "Cô Oanh - Bánh Khoái Tép", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(563, "Bánh Khoái Tép", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(564, "Bà Xuân - Bún Chả Đêm", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(565, "Bánh Khoái Bà Ly", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(566, "Bà Xuân - Chả Tôm", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(567, "Thanh Thông - Chả Tôm Hải Phòng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(568, "Chả Tôm Cô Hồng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(569, "Khoa Xuyến - Bánh Cuốn & Bánh Xèo", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(570, "Quán 23 - Bánh Cuốn", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/thanhhoa.jpg", 1, "Ngon", 1, 7, 21));
 
         //57
-        addRestaurant(new Restaurant(1, "Bluehands - Sinh Tố & Nước Ép Trái Cây", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Mô Ri - Fruit Juice & Fast Food", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Chi Lăng Ơi Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Cơm Tấm Miền Tây 2", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Cơm Tấm Sườn Que Mật Ong - Trần Phú", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nước Mía Sầu Riêng Nhà Rốt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Ngô Gia Food & Coffee", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Paris Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nem Chua Rán Khang", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "An Phước - Nước Ép & Sinh Tố", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(571, "Bluehands - Sinh Tố & Nước Ép Trái Cây", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(572, "Mô Ri - Fruit Juice & Fast Food", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(573, "Chi Lăng Ơi Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(574, "Cơm Tấm Miền Tây 2", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(575, "Cơm Tấm Sườn Que Mật Ong - Trần Phú", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(576, "Nước Mía Sầu Riêng Nhà Rốt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(577, "Ngô Gia Food & Coffee", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(578, "Paris Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(579, "Nem Chua Rán Khang", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(580, "An Phước - Nước Ép & Sinh Tố", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/hue.jpg", 1, "Ngon", 1, 7, 21));
 
         //58
-        addRestaurant(new Restaurant(1, "Hủ Tiếu Tuyết Minh - Trần Hưng Đạo", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Highlands Coffee - Big C Mỹ Tho", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bánh Mì Nướng Muối Ớt - Lê Đại Hành", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Nem Nướng Út Kem Mỹ Tho", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Bảo Minh Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Quán Cơm Tám Ri 3", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Làng Nướng Ba Tấn - Buffet Nướng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Minh Tâm Quán - Quốc Lộ 1A", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Xưa Lắc Xưa Lơ - Các Món Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Minh Tâm Quán - Heo Quay, Hủ Tiếu & Bò Kho", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(581, "Hủ Tiếu Tuyết Minh - Trần Hưng Đạo", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(582, "Highlands Coffee - Big C Mỹ Tho", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(583, "Bánh Mì Nướng Muối Ớt - Lê Đại Hành", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(584, "Nem Nướng Út Kem Mỹ Tho", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(585, "Bảo Minh Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(586, "Quán Cơm Tám Ri 3", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(587, "Làng Nướng Ba Tấn - Buffet Nướng", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(588, "Minh Tâm Quán - Quốc Lộ 1A", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(589, "Xưa Lắc Xưa Lơ - Các Món Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(590, "Minh Tâm Quán - Heo Quay, Hủ Tiếu & Bò Kho", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tiengiang.jpg", 1, "Ngon", 1, 7, 21));
 
         //59
-        addRestaurant(new Restaurant(1, "Cơm 24 - Điện Biên Phủ", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Bánh Bạch Tuộc Duyên Hải - Takoyaki Japanese Cake", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "9 An - Bún Nước Lèo & Bún Riêu Cua", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Út Hào - Bánh Canh", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Thiện 779 - Quán Ăn Gia Đình - Trần Phú", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Jollibee - CoopMart Trà Vinh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Quán Cơm Việt Hoa", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Cơm Sườn Bảy Cá", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Amigo - Mì Cay & Trà Sữa", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Rainbow Yogurt - Vincom Trà Vinh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(591, "Cơm 24 - Điện Biên Phủ", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(592, "Bánh Bạch Tuộc Duyên Hải - Takoyaki Japanese Cake", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(593, "9 An - Bún Nước Lèo & Bún Riêu Cua", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(594, "Út Hào - Bánh Canh", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(595, "Thiện 779 - Quán Ăn Gia Đình - Trần Phú", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(596, "Jollibee - CoopMart Trà Vinh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(597, "Quán Cơm Việt Hoa", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(598, "Cơm Sườn Bảy Cá", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(599, "Amigo - Mì Cay & Trà Sữa", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(600, "Rainbow Yogurt - Vincom Trà Vinh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh.jpg", 1, "Ngon", 1, 7, 21));
 
         //60
-        addRestaurant(new Restaurant(1, "Tiamo Coffee", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Kem, Chè & Đồ Ăn Vặt - Bình Thuận", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nhím 9X - Đinh Tiên Hoàng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Nhà Hàng Royal", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Cielo - Coffee & Ice Cream", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Ẩm Thực Việt 2", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Cu Chố - Phở Gà & Bún Cá", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Ăn Vặt Hải Yến", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bánh Mì Thịt Nướng - Bình Thuận", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Rice - Chuyện Của Gạo", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(601, "Tiamo Coffee", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(602, "Kem, Chè & Đồ Ăn Vặt - Bình Thuận", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(603, "Nhím 9X - Đinh Tiên Hoàng", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(604, "Nhà Hàng Royal", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(605, "Cielo - Coffee & Ice Cream", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(606, "Ẩm Thực Việt 2", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(607, "Cu Chố - Phở Gà & Bún Cá", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(608, "Ăn Vặt Hải Yến", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(609, "Bánh Mì Thịt Nướng - Bình Thuận", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(610, "Rice - Chuyện Của Gạo", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/tuyenquang.jpg", 1, "Ngon", 1, 7, 21));
 
         //61
-        addRestaurant(new Restaurant(1, "Hot Pot 72 - Quán Lẩu", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Jollibee - Vincom Plaza Vĩnh Long", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Trà Sữa Gold Tea", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Cháo Ếch Trần Nam", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Cháo Ếch - Hưng Đạo Vương", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Ốc Cầu Tân Hữu Mới", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Up Coffee & Tea", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Kim Tea", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Chị Oanh - Cơm Tấm Sườn Bì", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Phở 91", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(611, "Hot Pot 72 - Quán Lẩu", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(612, "Jollibee - Vincom Plaza Vĩnh Long", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(613, "Trà Sữa Gold Tea", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(614, "Cháo Ếch Trần Nam", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(615, "Cháo Ếch - Hưng Đạo Vương", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(616, "Ốc Cầu Tân Hữu Mới", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(617, "Up Coffee & Tea", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(618, "Kim Tea", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(619, "Chị Oanh - Cơm Tấm Sườn Bì", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(620, "Phở 91", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong.jpg", 1, "Ngon", 1, 7, 21));
 
         //62
-        addRestaurant(new Restaurant(1, "Jollibee - BigC Vĩnh Phúc", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Vườn Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nhà Hàng Hải Đăng - Món Ăn Đặc Sản", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Kem Chua Dẻo", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Thủy Cam - Đồ Ăn Vặt, Nước Giải Khát", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Nhà Hàng Tam Giao", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Sành Quán - Chuyên Ẩm Thực Việt", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Trà Sữa Tocotoco - Nguyễn Văn Linh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "4Teen - Đồ Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Liên Hoa - Cơm, Phở & Lẩu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(621, "Jollibee - BigC Vĩnh Phúc", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(622, "Vườn Coffee", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(623, "Nhà Hàng Hải Đăng - Món Ăn Đặc Sản", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(624, "Kem Chua Dẻo", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(625, "Thủy Cam - Đồ Ăn Vặt, Nước Giải Khát", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(626, "Nhà Hàng Tam Giao", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(627, "Sành Quán - Chuyên Ẩm Thực Việt", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(628, "Trà Sữa Tocotoco - Nguyễn Văn Linh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(629, "4Teen - Đồ Ăn Vặt", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(630, "Liên Hoa - Cơm, Phở & Lẩu", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhphuc.jpg", 1, "Ngon", 1, 7, 21));
 
         //63
-        addRestaurant(new Restaurant(1, "Pubu Foods & Drinks", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Quán Niêu - Cháo Ếch Singapore", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Harley Cafe", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Bánh Cuốn Thu Hà", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Jollibee - Vincom Plaza Yên Bái", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Trà Sữa Tocotoco - Nguyễn Tất Thành", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(1, "Hùng Phương - Ăn Vặt Quán", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(2, "Smile Coffee - Yên Ninh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bánh Mì Thanh Vân", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
-        addRestaurant(new Restaurant(3, "Bít Tết Ngon - Trần Phú", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(631, "Pubu Foods & Drinks", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(632, "Quán Niêu - Cháo Ếch Singapore", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(633, "Harley Cafe", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(634, "Bánh Cuốn Thu Hà", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(635, "Jollibee - Vincom Plaza Yên Bái", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(636, "Trà Sữa Tocotoco - Nguyễn Tất Thành", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(637, "Hùng Phương - Ăn Vặt Quán", 1, "https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(638, "Smile Coffee - Yên Ninh", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(639, "Bánh Mì Thanh Vân", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+        addRestaurant(new Restaurant(640, "Bít Tết Ngon - Trần Phú", 1,"https://fondekao.azurewebsites.net/Asset/Client/images/yenbai.jpg", 1, "Ngon", 1, 7, 21));
+
+        //Tag
+        addTag(new Tag(1, "Quán ăn"));
+        addTag(new Tag(2, "Nhà hàng"));
+        addTag(new Tag(3, "Cà phê"));
+        addTag(new Tag(4, "Vỉa hè"));
+        addTag(new Tag(5, "Ăn vặt"));
+        addTag(new Tag(6, "Quán nước"));
 
     }
 }
