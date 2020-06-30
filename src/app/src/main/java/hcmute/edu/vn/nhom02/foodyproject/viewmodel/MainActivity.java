@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //create database
-//        DBManager db= new DBManager( this );
-//        db.backupProvice();
+        DBManager db= new DBManager( this );
+        db.backupProvice();
 
         bntRestaurantList = (Button) findViewById(R.id.buttonRestaurantList);
         bntRestaurantList.setOnClickListener(new View.OnClickListener() {

@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -17,6 +18,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.ResultReceiver;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,23 +30,35 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import hcmute.edu.vn.nhom02.foodyproject.Constants;
 import hcmute.edu.vn.nhom02.foodyproject.data.DBManager;
 import hcmute.edu.vn.nhom02.foodyproject.model.Food;
 import hcmute.edu.vn.nhom02.foodyproject.R;
+import hcmute.edu.vn.nhom02.foodyproject.model.Location;
 import hcmute.edu.vn.nhom02.foodyproject.model.Restaurant;
 import hcmute.edu.vn.nhom02.foodyproject.model.Tag;
+import hcmute.edu.vn.nhom02.foodyproject.service.GPSTracker;
+import hcmute.edu.vn.nhom02.foodyproject.service.GeocodingLocation;
 import hcmute.edu.vn.nhom02.foodyproject.service.RecylerFoodAdapter;
 
 public class RestaurantDetail extends AppCompatActivity {
 
-    TextView tvDistance, tvResStatus, tvOpenCloseTime, tvCategoryName;
+    TextView tvDistance, tvResStatus, tvOpenCloseTime, tvCategoryName, tvLocation;
     List<Food> lstFood;
     Button btnWifi, btnMenu, btnContact;
     private static final int REQUEST_PHONE_CALL = 1;
+    double currentLat, currentLong;
+    private  static  final  int REQUEST_CODE_LOCATION_PERMISSION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,22 +114,12 @@ public class RestaurantDetail extends AppCompatActivity {
             }
         });
 
-        tvDistance = (TextView) findViewById(R.id.tvDistance);
-        String text = "<font color=#00ff00>4.2km</font> (Từ vị trí hiện tại)";
-        tvDistance.setText(Html.fromHtml(text));
-
-        lstFood = new ArrayList<>();
-//        lstFood.add(new Food("Mẹt 160k", R.drawable.dongnai1));
-//        lstFood.add(new Food("Mẹt khủng", R.drawable.dongnai2));
-//        lstFood.add(new Food("Mẹt 4 người" , R.drawable.dongnai3));
-        RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerview_food);
-        RecylerFoodAdapter myAdapter = new RecylerFoodAdapter(this, lstFood);
-        myrv.setLayoutManager(new GridLayoutManager(this, 2));
-        myrv.setAdapter(myAdapter);
 
         tvResStatus = findViewById(R.id.resStatus);
         tvOpenCloseTime = findViewById(R.id.resOpenCloseTime);
         tvCategoryName = findViewById(R.id.resCategory);
+        tvLocation = findViewById(R.id.tvLocation);
+        tvDistance = (TextView) findViewById(R.id.tvDistance);
 
         Restaurant restaurant = new Restaurant();
         Intent intent = getIntent();
@@ -135,6 +141,54 @@ public class RestaurantDetail extends AppCompatActivity {
                 Tag tag = dbmanager.getTag(restaurant.getTagId());
                 tvCategoryName.setText(tag.getName());
             }
+
+            if(restaurant.getLocationId() != 0)
+            {
+                Location location = dbmanager.getLocation(restaurant.getLocationId());
+                tvLocation.setText(location.getName());
+
+
+                GeocodingLocation locationAddress = new GeocodingLocation();
+                android.location.Location currentLocation = new android.location.Location("currentLocation");
+                GPSTracker mGPS = new GPSTracker(this);
+
+                if(mGPS.canGetLocation ){
+                    mGPS.getLocation();
+                    currentLat = mGPS.getLatitude();
+                    currentLong = mGPS.getLongitude();
+                }else{
+                    System.out.println("Unable");
+                }
+                if(currentLat == 0 || currentLong == 0)
+                {
+                    Toast.makeText(this, "Vui lòng bật GPS để xem khoảng cách", Toast.LENGTH_SHORT).show();
+                    String text = "<font color=#149414>Vui lòng bật GPS để xem khoảng cách</font>";
+                }
+                else
+                {
+                    currentLocation.setLatitude(currentLat);//your coords of course
+                    currentLocation.setLongitude(currentLong);
+
+                    android.location.Location resLocation = new android.location.Location("resLocation");
+                    resLocation.setLatitude(location.getLatitude());
+                    resLocation.setLongitude(location.getLongitude());
+                    float distance = currentLocation.distanceTo(resLocation)/1000;
+
+                    String text = "<font color=#149414>"+((double) Math.round(distance * 10) / 10)+"km</font> (Từ vị trí hiện tại)";
+                    tvDistance.setText(Html.fromHtml(text));
+//                    tvDistance.setText(String.valueOf(distance));
+                }
+            }
+
+
+            lstFood = new ArrayList<>();
+//        lstFood.add(new Food("Mẹt 160k", R.drawable.dongnai1));
+//        lstFood.add(new Food("Mẹt khủng", R.drawable.dongnai2));
+//        lstFood.add(new Food("Mẹt 4 người" , R.drawable.dongnai3));
+            RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerview_food);
+            RecylerFoodAdapter myAdapter = new RecylerFoodAdapter(this, lstFood);
+            myrv.setLayoutManager(new GridLayoutManager(this, 2));
+            myrv.setAdapter(myAdapter);
         }
     }
 
@@ -161,25 +215,7 @@ public class RestaurantDetail extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
 
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    Toast.makeText(RestaurantDetail.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
-                }
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
     }
+
 }
