@@ -53,5 +53,12 @@ public class RestaurantResult extends AppCompatActivity {
         myAdapter = new RecyclerViewAdapterResult(this, lstRestaurant);
         myrv.setLayoutManager(new GridLayoutManager(this, 1));
         myrv.setAdapter(myAdapter);
+
+        findViewById(R.id.buttonBack).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
