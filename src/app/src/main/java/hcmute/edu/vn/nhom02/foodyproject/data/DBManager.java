@@ -13,8 +13,10 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 
 import java.io.File;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import hcmute.edu.vn.nhom02.foodyproject.model.CategoryFood;
 import hcmute.edu.vn.nhom02.foodyproject.model.Food;
@@ -291,6 +293,45 @@ public class DBManager extends SQLiteOpenHelper {
         }
         db.close();
         return  listRestaurant;
+    }
+
+    public List<Restaurant> GetRestaurantByName(String searchString){
+        List<Restaurant> listRestaurant= new ArrayList<>();
+        String selectQuery= "Select * from "+ TABLE2;
+
+        SQLiteDatabase db =this.getWritableDatabase();
+        Cursor cursor= db.rawQuery(selectQuery,null);
+        if(cursor.moveToFirst()){
+            do{
+                Restaurant restaurant = new Restaurant();
+                restaurant.setId(cursor.getInt(0));
+                restaurant.setName(cursor.getString(1));
+                restaurant.setProvinceId(cursor.getInt(2));
+                restaurant.setThumbnail(cursor.getString(3));
+                restaurant.setTagId(cursor.getInt(4));
+                restaurant.setDescription(cursor.getString(5));
+                restaurant.setLocationId(cursor.getInt(6));
+                restaurant.setTimeOpen(cursor.getInt(7));
+                restaurant.setTimeOpen(cursor.getInt(7));
+                listRestaurant.add(restaurant);
+            }while (cursor.moveToNext());
+        }
+        db.close();
+        List<Restaurant> searchedRestaurant = new ArrayList<>();
+        for (Restaurant item : listRestaurant)
+        {
+            if(deAccent(item.getName().toLowerCase()) == deAccent(searchString.toLowerCase()))
+            {
+                searchedRestaurant.add(item);
+            }
+        }
+        return  searchedRestaurant;
+    }
+
+    public static String deAccent(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
 
     public  ArrayList<Food> GetFoodByRestaurant(int resId)

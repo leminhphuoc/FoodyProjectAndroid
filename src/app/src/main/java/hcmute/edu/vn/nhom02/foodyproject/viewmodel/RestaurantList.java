@@ -56,5 +56,13 @@ public class RestaurantList extends AppCompatActivity {
         myrv.setLayoutManager(new GridLayoutManager(this, 2));
         myrv.setAdapter(myAdapter);
         Toast.makeText(this, provinceId + "", Toast.LENGTH_LONG).show();
+
+        findViewById(R.id.editSearch).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RestaurantList.this, RestaurantResult.class);
+                startActivity(intent);
+            }
+        });
     }
 }

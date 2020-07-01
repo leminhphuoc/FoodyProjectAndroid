@@ -16,7 +16,7 @@
         android:background="#F81F10">
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/editSearch"
             android:layout_width="match_parent"
             android:layout_height="50sp"
             android:layout_centerHorizontal="true"

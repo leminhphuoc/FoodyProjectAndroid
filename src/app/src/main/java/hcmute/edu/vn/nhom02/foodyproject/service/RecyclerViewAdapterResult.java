@@ -12,15 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import hcmute.edu.vn.nhom02.foodyproject.R;
+import hcmute.edu.vn.nhom02.foodyproject.data.DBManager;
+import hcmute.edu.vn.nhom02.foodyproject.model.Location;
 import hcmute.edu.vn.nhom02.foodyproject.model.Restaurant;
+import hcmute.edu.vn.nhom02.foodyproject.model.Tag;
 import hcmute.edu.vn.nhom02.foodyproject.viewmodel.RestaurantList;
 
 public class RecyclerViewAdapterResult extends RecyclerView.Adapter<RecyclerViewAdapterResult.MyViewHolder>{
     private Context mContext;
     private List<Restaurant> mData;
+    private DBManager dbManager;
 
     public RecyclerViewAdapterResult(Context mContext, List<Restaurant> mData) {
         this.mContext = mContext;
@@ -39,10 +45,15 @@ public class RecyclerViewAdapterResult extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+        dbManager = new DBManager(mContext);
         holder.tv_restaurant_name.setText(mData.get(position).getName());
-        holder.tv_restaurant_address.setText(mData.get(position).getLocationId());
-        holder.tv_restaurant_type.setText(mData.get(position).getTagId());
-        //holder.img_restaurant_thumbnail.setImageResource(mData.get(position).getThumbnail());
+        Location location = dbManager.getLocation(mData.get(position).getLocationId());
+        Tag tag = dbManager.getTag(mData.get(position).getTagId());
+        holder.tv_restaurant_address.setText(location.getName());
+        holder.tv_restaurant_type.setText(tag.getName());
+//        holder.tv_restaurant_address.setText(mData.get(position).getLocationId());
+//        holder.tv_restaurant_type.setText(mData.get(position).getTagId());
+        Picasso.with(mContext).load(mData.get(position).getThumbnail()).resize(180,140).into(holder.img_restaurant_thumbnail);
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
