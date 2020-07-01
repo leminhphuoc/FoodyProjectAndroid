@@ -57,7 +57,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="8"
                 android:background="@android:color/transparent"
-                android:text="Địa điểm ở Đồng Nai" />
+                android:text="ở An Giang" />
 
         </RelativeLayout>
 

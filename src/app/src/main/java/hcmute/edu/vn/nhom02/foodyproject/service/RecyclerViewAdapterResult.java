@@ -21,6 +21,7 @@ import hcmute.edu.vn.nhom02.foodyproject.data.DBManager;
 import hcmute.edu.vn.nhom02.foodyproject.model.Location;
 import hcmute.edu.vn.nhom02.foodyproject.model.Restaurant;
 import hcmute.edu.vn.nhom02.foodyproject.model.Tag;
+import hcmute.edu.vn.nhom02.foodyproject.viewmodel.RestaurantDetail;
 import hcmute.edu.vn.nhom02.foodyproject.viewmodel.RestaurantList;
 
 public class RecyclerViewAdapterResult extends RecyclerView.Adapter<RecyclerViewAdapterResult.MyViewHolder>{
@@ -58,13 +59,12 @@ public class RecyclerViewAdapterResult extends RecyclerView.Adapter<RecyclerView
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(mContext, RestaurantList.class);
-
+                Intent intent = new Intent(mContext, RestaurantDetail.class);
+                intent.putExtra("RestaurantId",mData.get(position).getId());
                 //passing data to the book activity
-                intent.putExtra("Name",mData.get(position).getName());
-                intent.putExtra("Address",mData.get(position).getLocationId());
-                intent.putExtra("Typre",mData.get(position).getTagId());
-                intent.putExtra("Thumbnail",mData.get(position).getThumbnail());
+//                intent.putExtra("Name",mData.get(position).getName());
+//                intent.putExtra("Address",mData.get(position).getLocationId());
+//                intent.putExtra("Thumbnail",mData.get(position).getThumbnail());
                 //start the activity
                 mContext.startActivity(intent);
             }

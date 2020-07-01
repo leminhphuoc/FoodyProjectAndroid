@@ -70,12 +70,12 @@
                 <TextView
                     android:id="@+id/restaurant_type_id"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
+                    android:layout_height="31dp"
                     android:layout_marginTop="10dp"
+                    android:gravity="left"
                     android:text="Type"
                     android:textColor="#2d2d2d"
-                    android:textSize="14sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
 
     </LinearLayout>

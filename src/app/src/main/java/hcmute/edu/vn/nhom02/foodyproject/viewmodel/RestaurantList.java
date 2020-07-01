@@ -24,6 +24,7 @@ public class RestaurantList extends AppCompatActivity {
     List<Restaurant> lstRestaurant;
     List<Restaurant> lstRestaurantTest;
     int provinceId;
+    String nameProvince;
     Button btnNamePro;
 
     private final  String android_image_urls=
@@ -49,7 +50,7 @@ public class RestaurantList extends AppCompatActivity {
                 startActivity(intentProvince);
             }
         });
-        String nameProvince = intent.getStringExtra("ProNameee");
+        nameProvince = intent.getStringExtra("ProNameee");
         if (nameProvince != null){
             btnNamePro.setText(nameProvince);
         }
@@ -57,12 +58,15 @@ public class RestaurantList extends AppCompatActivity {
         RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this, lstRestaurant);
         myrv.setLayoutManager(new GridLayoutManager(this, 2));
         myrv.setAdapter(myAdapter);
+
         Toast.makeText(this, provinceId + "", Toast.LENGTH_LONG).show();
 
         findViewById(R.id.editSearch).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Intent intent = new Intent(RestaurantList.this, RestaurantResult.class);
+                intent.putExtra("ProvinceId",provinceId);
+                intent.putExtra("ProvinceName",nameProvince);
                 startActivity(intent);
                 return false;
             }

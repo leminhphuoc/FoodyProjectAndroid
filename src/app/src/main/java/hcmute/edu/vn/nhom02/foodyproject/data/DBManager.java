@@ -295,9 +295,9 @@ public class DBManager extends SQLiteOpenHelper {
         return  listRestaurant;
     }
 
-    public List<Restaurant> GetRestaurantByName(String searchString){
+    public List<Restaurant> GetRestaurantByName(String searchString, int province){
         List<Restaurant> listRestaurant= new ArrayList<>();
-        String selectQuery= "Select * from "+ TABLE2;
+        String selectQuery= "Select * from "+ TABLE2 +" where provinceId = "+province;
 
         SQLiteDatabase db =this.getWritableDatabase();
         Cursor cursor= db.rawQuery(selectQuery,null);

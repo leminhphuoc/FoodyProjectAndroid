@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -23,6 +25,9 @@ public class RestaurantResult extends AppCompatActivity {
 
     List<Restaurant> lstRestaurant;
     EditText editSearch;
+    int provinceId;
+    String provinceName;
+    Button nameButton;
 
     DBManager dbManager = new DBManager(this);
     RecyclerViewAdapterResult myAdapter;
@@ -33,22 +38,16 @@ public class RestaurantResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_result);
         editSearch = findViewById(R.id.editSearch);
+        Intent intent = getIntent();
+        provinceId = intent.getIntExtra("ProvinceId", 1);
 
-        editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId,
-                                          KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_GO) {
-                    lstRestaurant = dbManager.GetRestaurantByName(editSearch.getText().toString());
-                    myAdapter.notifyDataSetChanged();
-                    return true;
-                }
-                return false;
-            }
-        });
+        nameButton = (Button) findViewById(R.id.button1);
+        provinceName = intent.getStringExtra("ProvinceName");
+        if (provinceName != null){
+            nameButton.setText(provinceName);
+        }
 
-
-
-        lstRestaurant = dbManager.getAllRestaurant();
+        lstRestaurant = dbManager.getRestaurantByProvince(provinceId);
         RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerviewResult_id);
         myAdapter = new RecyclerViewAdapterResult(this, lstRestaurant);
         myrv.setLayoutManager(new GridLayoutManager(this, 1));

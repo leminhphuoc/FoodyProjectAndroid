@@ -42,7 +42,7 @@
             android:layout_marginRight="22dp"
             android:layout_weight="8"
             android:background="@android:color/transparent"
-            android:text="Đồng Nai" />
+            android:text="An Giang" />
 
     </RelativeLayout>
 
