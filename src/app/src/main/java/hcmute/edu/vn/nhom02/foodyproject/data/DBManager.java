@@ -1995,12 +1995,54 @@ public class DBManager extends SQLiteOpenHelper {
 
             addFoodCategory(new CategoryFood(1, "Bò mỹ nhúng ớt"));
             addFoodCategory(new CategoryFood(2, "Bún đậu"));
+            addFoodCategory(new CategoryFood(3, "Đồ nướng"));
+            addFoodCategory(new CategoryFood(4, "Trà sữa"));
+            addFoodCategory(new CategoryFood(5, "Sinh tố"));
+            addFoodCategory(new CategoryFood(6, "Đồ chay"));
 
-            addFood(new Food(1,"Bò Mỹ nhúng ớt nhỏ", (double) 119000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai1.jpg",1,1));
-            addFood(new Food(2,"Bò Mỹ nhúng ớt vừa", (double) 239000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai2.jpg",1,1));
-            addFood(new Food(3,"Bò Mỹ nhúng ớt to", (double) 349000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai3.jpg",1,1));
-            addFood(new Food(4,"Mẹt nhỏ", (double) 49000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai4.jpg",1,2));
-            addFood(new Food(5,"Mẹt vừa", (double) 59000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai5.jpg",1,2));
+            addFood(new Food(1,"Gà rán", (double) 119000,"https://fondekao.azurewebsites.net/Asset/Client/images/hanam5.jpg",1,1));
+            addFood(new Food(2,"Cơm sườn", (double) 239000,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang7.jpg",1,1));
+            addFood(new Food(3,"Sinh Tố", (double) 349000,"https://fondekao.azurewebsites.net/Asset/Client/images/bacgiang7.jpg",2,3));
+            addFood(new Food(4,"Trà Sữa", (double) 49000,"https://fondekao.azurewebsites.net/Asset/Client/images/gialai8.jpg",1,1));
+            addFood(new Food(5,"Sushi", (double) 59000,"https://fondekao.azurewebsites.net/Asset/Client/images/haiphong8.jpg",2,3));
+            addFood(new Food(6,"Thịt nướng", (double) 119000,"https://fondekao.azurewebsites.net/Asset/Client/images/hoabinh8.jpg",1,2));
+            addFood(new Food(7,"Canh Hải Sản", (double) 239000,"https://fondekao.azurewebsites.net/Asset/Client/images/hoabinh5.jpg",2,3));
+            addFood(new Food(8,"Trứng chiên", (double) 349000,"https://fondekao.azurewebsites.net/Asset/Client/images/haiduong3.jpg",1,2));
+            addFood(new Food(9,"Trà Sữa", (double) 49000,"https://fondekao.azurewebsites.net/Asset/Client/images/hagiang10.jpg",1,2));
+            addFood(new Food(10,"Sushi", (double) 59000,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh9.jpg",2,3));
+            addFood(new Food(11,"Súp cua", (double) 119000,"https://fondekao.azurewebsites.net/Asset/Client/images/binhthuan1.jpg",1,1));
+            addFood(new Food(12,"Bánh plan", (double) 239000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai5.jpg",2,3));
+            addFood(new Food(13,"Bánh mì que", (double) 349000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri9.jpg",1,2));
+            addFood(new Food(14,"Bò Kho", (double) 49000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai4.jpg",1,1));
+            addFood(new Food(15,"Sushi", (double) 59000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai7.jpg",2,3));
+            addFood(new Food(16,"Gà rán", (double) 119000,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh7.jpg",1,2));
+            addFood(new Food(17,"Cơm sườn", (double) 239000,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh1.jpg",2,4));
+            addFood(new Food(18,"Sinh Tố", (double) 349000,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen8.jpg",2,4));
+            addFood(new Food(19,"Trà Sữa", (double) 49000,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh8.jpg",2,4));
+            addFood(new Food(20,"Sushi", (double) 59000,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong4.jpg",2,4));
+
+
+//3  4
+            addFood(new Food(31,"Gà rán", (double) 119000,"https://fondekao.azurewebsites.net/Asset/Client/images/hanam5.jpg",4,6));
+            addFood(new Food(32,"Cơm sườn", (double) 239000,"https://fondekao.azurewebsites.net/Asset/Client/images/angiang7.jpg",3,5));
+            addFood(new Food(33,"Sinh Tố", (double) 349000,"https://fondekao.azurewebsites.net/Asset/Client/images/bacgiang7.jpg",3,5));
+            addFood(new Food(34,"Trà Sữa", (double) 49000,"https://fondekao.azurewebsites.net/Asset/Client/images/gialai8.jpg",3,5));
+            addFood(new Food(35,"Sushi", (double) 59000,"https://fondekao.azurewebsites.net/Asset/Client/images/haiphong8.jpg",4,6));
+            addFood(new Food(36,"Thịt nướng", (double) 119000,"https://fondekao.azurewebsites.net/Asset/Client/images/hoabinh8.jpg",3,5));
+            addFood(new Food(37,"Canh Hải Sản", (double) 239000,"https://fondekao.azurewebsites.net/Asset/Client/images/hoabinh5.jpg",4,6));
+            addFood(new Food(38,"Trứng chiên", (double) 349000,"https://fondekao.azurewebsites.net/Asset/Client/images/haiduong3.jpg",3,5));
+            addFood(new Food(39,"Trà Sữa", (double) 49000,"https://fondekao.azurewebsites.net/Asset/Client/images/hagiang10.jpg",4,6));
+            addFood(new Food(40,"Sushi", (double) 59000,"https://fondekao.azurewebsites.net/Asset/Client/images/ninhbinh9.jpg",3,5));
+            addFood(new Food(21,"Súp cua", (double) 119000,"https://fondekao.azurewebsites.net/Asset/Client/images/binhthuan1.jpg",4,6));
+            addFood(new Food(22,"Bánh plan", (double) 239000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai5.jpg",4,6));
+            addFood(new Food(23,"Bánh mì que", (double) 349000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangtri9.jpg",4,6));
+            addFood(new Food(24,"Bò Kho", (double) 49000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai4.jpg",4,6));
+            addFood(new Food(25,"Sushi", (double) 59000,"https://fondekao.azurewebsites.net/Asset/Client/images/quangngai7.jpg",4,6));
+            addFood(new Food(26,"Gà rán", (double) 119000,"https://fondekao.azurewebsites.net/Asset/Client/images/tayninh7.jpg",4,6));
+            addFood(new Food(27,"Cơm sườn", (double) 239000,"https://fondekao.azurewebsites.net/Asset/Client/images/thaibinh1.jpg",3,5));
+            addFood(new Food(28,"Sinh Tố", (double) 349000,"https://fondekao.azurewebsites.net/Asset/Client/images/thainguyen8.jpg",3,5));
+            addFood(new Food(29,"Trà Sữa", (double) 49000,"https://fondekao.azurewebsites.net/Asset/Client/images/travinh8.jpg",3,5));
+            addFood(new Food(30,"Sushi", (double) 59000,"https://fondekao.azurewebsites.net/Asset/Client/images/vinhlong4.jpg",3,5));
         }
     }
 }
