@@ -39,6 +39,7 @@ public class RestaurantList extends AppCompatActivity {
         Toast.makeText(this, provinceId + "", Toast.LENGTH_LONG).show();
         lstRestaurant = new ArrayList<>();
         DBManager dbmanager=new DBManager(this);
+        dbmanager.backupProvice();
         lstRestaurant =dbmanager.getRestaurantByProvince(provinceId);
         btnNamePro = (Button) findViewById(R.id.buttonProName);
         btnNamePro.setOnClickListener(new View.OnClickListener() {
