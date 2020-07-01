@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -57,11 +58,12 @@ public class RestaurantList extends AppCompatActivity {
         myrv.setAdapter(myAdapter);
         Toast.makeText(this, provinceId + "", Toast.LENGTH_LONG).show();
 
-        findViewById(R.id.editSearch).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.editSearch).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
                 Intent intent = new Intent(RestaurantList.this, RestaurantResult.class);
                 startActivity(intent);
+                return false;
             }
         });
     }

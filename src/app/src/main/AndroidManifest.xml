@@ -25,9 +25,9 @@
         <activity android:name=".viewmodel.MenuActivity" android:theme="@style/AppThemeNoActionbar" />
         <activity android:name=".viewmodel.ProvinceList" />
         <activity android:name=".viewmodel.RestaurantResult" />
-        <activity android:name=".viewmodel.RestaurantList" />
+        <activity android:name=".viewmodel.MainActivity" />
         <activity android:name=".viewmodel.RestaurantDetail"/> <!-- <activity android:name=".RestaurantDetail" /> -->
-        <activity android:name=".viewmodel.MainActivity">
+        <activity android:name=".viewmodel.RestaurantList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

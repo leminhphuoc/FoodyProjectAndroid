@@ -44,7 +44,6 @@
                 android:background="@drawable/button_round"
                 android:drawableLeft="@drawable/iconsearch"
                 android:drawablePadding="10dp"
-                android:text="Bún"
                 android:paddingLeft="10dp"
                 android:textSize="15sp" />
 
