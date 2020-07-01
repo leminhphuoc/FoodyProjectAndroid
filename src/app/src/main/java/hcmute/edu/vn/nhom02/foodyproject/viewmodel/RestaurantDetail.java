@@ -58,6 +58,7 @@ public class RestaurantDetail extends AppCompatActivity {
     List<Food> lstFood;
     Button btnWifi, btnMenu, btnContact;
     private static final int REQUEST_PHONE_CALL = 1;
+    private static final int REQUEST_GPS = 1;
     double currentLat, currentLong;
     private  static  final  int REQUEST_CODE_LOCATION_PERMISSION = 1;
     private  int resId = 0;
@@ -159,31 +160,37 @@ public class RestaurantDetail extends AppCompatActivity {
                 android.location.Location currentLocation = new android.location.Location("currentLocation");
                 GPSTracker mGPS = new GPSTracker(this);
 
-                if(mGPS.canGetLocation ){
-                    mGPS.getLocation();
-                    currentLat = mGPS.getLatitude();
-                    currentLong = mGPS.getLongitude();
-                }else{
-                    System.out.println("Unable");
-                }
-                if(currentLat == 0 || currentLong == 0)
-                {
-                    Toast.makeText(this, "Vui lòng bật GPS để xem khoảng cách", Toast.LENGTH_SHORT).show();
-                    String text = "<font color=#149414>Vui lòng bật GPS để xem khoảng cách</font>";
+                if (ContextCompat.checkSelfPermission(RestaurantDetail.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(RestaurantDetail.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_GPS);
                 }
                 else
                 {
-                    currentLocation.setLatitude(currentLat);//your coords of course
-                    currentLocation.setLongitude(currentLong);
+                    if(mGPS.canGetLocation ){
+                        mGPS.getLocation();
+                        currentLat = mGPS.getLatitude();
+                        currentLong = mGPS.getLongitude();
+                    }else{
+                        System.out.println("Unable");
+                    }
+                    if(currentLat == 0 || currentLong == 0)
+                    {
+                        Toast.makeText(this, "Vui lòng bật GPS để xem khoảng cách", Toast.LENGTH_SHORT).show();
+                        String text = "<font color=#149414>Vui lòng bật GPS để xem khoảng cách</font>";
+                    }
+                    else
+                    {
+                        currentLocation.setLatitude(currentLat);//your coords of course
+                        currentLocation.setLongitude(currentLong);
 
-                    android.location.Location resLocation = new android.location.Location("resLocation");
-                    resLocation.setLatitude(location.getLatitude());
-                    resLocation.setLongitude(location.getLongitude());
-                    float distance = currentLocation.distanceTo(resLocation)/1000;
+                        android.location.Location resLocation = new android.location.Location("resLocation");
+                        resLocation.setLatitude(location.getLatitude());
+                        resLocation.setLongitude(location.getLongitude());
+                        float distance = currentLocation.distanceTo(resLocation)/1000;
 
-                    String text = "<font color=#149414>"+((double) Math.round(distance * 10) / 10)+"km</font> (Từ vị trí hiện tại)";
-                    tvDistance.setText(Html.fromHtml(text));
+                        String text = "<font color=#149414>"+((double) Math.round(distance * 10) / 10)+"km</font> (Từ vị trí hiện tại)";
+                        tvDistance.setText(Html.fromHtml(text));
 //                    tvDistance.setText(String.valueOf(distance));
+                    }
                 }
             }
 
